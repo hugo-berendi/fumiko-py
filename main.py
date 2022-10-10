@@ -26,4 +26,4 @@ for filename in os.listdir("cogs\\commands"):
 		bot.load_extension(f"cogs.commands.{filename[:-3]}")
 
 # run the bot
-bot.run(os.environ.get("DISCORD_TOKEN"))
+bot.run(os.environ.get("TOKEN"))
