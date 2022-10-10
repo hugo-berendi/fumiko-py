@@ -1,0 +1,5 @@
+pycord
+python-dotenv
+matplotlib
+numpy
+sympy

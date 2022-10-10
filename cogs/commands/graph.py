@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-import math
 import discord
 from discord.ext import commands
 from discord.commands import slash_command, Option
