@@ -17,12 +17,12 @@ class Heron(commands.Cog):
 			while abs(new-prev) > error:
 				prev = new
 				new = (new+n/new)/2
-			return new
+			return str(new)
 
 		# create embed named emb
 		emb = discord.Embed(
 			title="Graph",
-			description=f"{heron(n, 0.01)}",
+			description=heron(n, 0.01),
 			color=discord.Color.blue())
 
 		# add timestamp to emb
