@@ -17,23 +17,18 @@ class Heron(commands.Cog):
 			while abs(new-prev) > error:
 				prev = new
 				new = (new+n/new)/2
-			return format(new, ".50f")
+			return new
 
 		# create embed named emb
 		emb = discord.Embed(
 			title="Graph",
-			description="",
+			description=f"```\n{heron(n, 0.01)}\n```"
 			color=discord.Color.blue())
-
-		# add output
-		sp.preview(r'$' + heron(n, 0.01) + '§', output="png", filename='out.png', euler=False)
-		file = discord.File("out.png")
-		emb.set_image(url="attachment://out.png")
 
 		# add timestamp to emb
 		emb.timestamp = discord.utils.utcnow()
 
-		await ctx.respond(file=file, embed=emb)
+		await ctx.respond(mbed=emb)
 
 		os.remove("out.png")
 
