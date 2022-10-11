@@ -22,7 +22,7 @@ class Heron(commands.Cog):
 		# create embed named emb
 		emb = discord.Embed(
 			title="Graph",
-			description=f"```\n{heron(n, 0.01)}\n```"
+			description=f"```\n{heron(n, 0.01)}\n```",
 			color=discord.Color.blue())
 
 		# add timestamp to emb
