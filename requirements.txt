@@ -1,4 +1,5 @@
 pycord
+discord.py
 python-dotenv
 matplotlib
 sympy
