@@ -16,12 +16,12 @@ bot = discord.Bot(
 )
 
 # load events
-for filename in os.listdir("cogs\\events"):
+for filename in os.listdir("./cogs/events"):
 	if filename.endswith(".py"):
 		bot.load_extension(f"cogs.events.{filename[:-3]}")
 
 # load commands
-for filename in os.listdir("cogs\\commands"):
+for filename in os.listdir("./cogs/commands"):
 	if filename.endswith(".py"):
 		bot.load_extension(f"cogs.commands.{filename[:-3]}")
 
