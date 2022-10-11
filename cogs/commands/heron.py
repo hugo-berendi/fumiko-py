@@ -28,7 +28,7 @@ class Heron(commands.Cog):
 		# add timestamp to emb
 		emb.timestamp = discord.utils.utcnow()
 
-		await ctx.respond(mbed=emb)
+		await ctx.respond(embed=emb)
 
 		os.remove("out.png")
 
