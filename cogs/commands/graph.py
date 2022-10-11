@@ -36,6 +36,8 @@ class Graph(commands.Cog):
 
 			await ctx.respond(file=file, embed=emb)
 
+			plt.clf()
+
 			os.remove("out.png")
 
 def setup(bot):

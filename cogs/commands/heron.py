@@ -22,15 +22,13 @@ class Heron(commands.Cog):
 		# create embed named emb
 		emb = discord.Embed(
 			title="Graph",
-			description=f"```\n{heron(n, 0.01)}\n```",
+			description=f"{heron(n, 0.01)}",
 			color=discord.Color.blue())
 
 		# add timestamp to emb
 		emb.timestamp = discord.utils.utcnow()
 
 		await ctx.respond(embed=emb)
-
-		os.remove("out.png")
 
 def setup(bot):
 	bot.add_cog(Heron(bot))
