@@ -10,7 +10,7 @@ intents.message_content = True
 intents.members = True
 
 # init the bot
-bot = discord.Bot(
+bot = discord.Bot( 
 		intent=intents,
 		debug_guilds=[990521467215171594]
 )
