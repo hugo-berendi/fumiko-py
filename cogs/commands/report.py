@@ -8,19 +8,41 @@ class Report(commands.Cog):
         self.bot = bot
 
     @slash_command(description="Report something", name="report")
-    async def report(self, ctx: discord.ApplicationContext):
+    async def report(self, ctx: discord.ApplicationContext, message: Option(discord.Message, 'Message')):
+
         class MyModal(discord.ui.Modal):
             def __init__(self, *args, **kwargs) -> None:
-                super().__init__(*args, **kwargs)
-
-                self.add_item(discord.ui.InputText(label="Long Input", style=discord.InputTextStyle.long))
+                super().__init__(
+                    discord.ui.InputText(
+                        label="Short Input",
+                        placeholder="Placeholder Test",
+                    ),
+                    discord.ui.InputText(
+                        label="Longer Input",
+                        value="Longer Value\nSuper Long Value",
+                        style=discord.InputTextStyle.long,
+                    ),
+                    *args,
+                    **kwargs,
+                )
 
             async def callback(self, interaction: discord.Interaction):
-                embed = discord.Embed(title="Modal Results")
-                embed.add_field(name="Long Input", value=self.children[1].value)
+                embed = discord.Embed(
+                    title="Your Modal Results",
+                    fields=[
+                        discord.EmbedField(
+                            name="First Input", value=self.children[0].value, inline=False
+                        ),
+                        discord.EmbedField(
+                            name="Second Input", value=self.children[1].value, inline=False
+                        ),
+                    ],
+                    color=discord.Color.random(),
+                )
                 await interaction.response.send_message(embeds=[embed])
 
-        modal = MyModal(title="Modal via Slash Command")
+        modal = MyModal(title="Message Command Modal")
+        modal.title = f"Modal for Message ID: {message.id}"
         await ctx.send_modal(modal)
 
 
