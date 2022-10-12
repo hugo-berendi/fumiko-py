@@ -35,7 +35,8 @@ class Nsfw(commands.Cog):
 
         out_raw = requests.get(f"http://api.nekos.fun:8080/api/{type}/")
         out_raw_json = out_raw.json()
-        out = json.loads(out_raw_json)['image']
+        out_json = json.dumps(out_raw_json)
+        out = json.loads(out_json)['image']
 
         # create embed named emb
         emb = discord.Embed(
