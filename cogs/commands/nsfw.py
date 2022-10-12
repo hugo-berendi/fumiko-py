@@ -20,7 +20,6 @@ class Nsfw(commands.Cog):
                 description='Choose the type for the hentai',
                 choices=[
                     OptionChoice(name='4K', value='4k'),
-                    OptionChoice(name='Ass', value='ass'),
                     OptionChoice(name='Blowjob', value='bj'),
                     OptionChoice(name='Boobs', value='boobs'),
                     OptionChoice(name='Cum', value='cum'),
@@ -36,8 +35,7 @@ class Nsfw(commands.Cog):
 
         out_raw = requests.get(f"http://api.nekos.fun:8080/api/{type}/")
         out_raw_json = out_raw.json()
-        out_json = json.dumps(out_raw_json, indent = 4)
-        out = out_json["image"]
+        out = json.loads(out_raw_json)['image']
 
         # create embed named emb
         emb = discord.Embed(
@@ -46,7 +44,7 @@ class Nsfw(commands.Cog):
             color=discord.Color.blue())
 
         # add img
-        emb.set_image(url=f"{str(out)}")
+        emb.set_image(url=f"{out}")
 
         # add timestamp to emb
         emb.timestamp = discord.utils.utcnow()
