@@ -35,14 +35,14 @@ class Nsfw(commands.Cog):
                 ])):
 
         out_raw = requests.get(f"http://api.nekos.fun:8080/api/{type}/")
-        out_json = out_raw.json()
-        out = json.loads(out_json)
-        img = out["image"]
+        out_raw_json = out_raw.json()
+        out_json = json.dumps(out_raw_json, indent = 4)
+        out = out_json["image"]
 
         # create embed named emb
         emb = discord.Embed(
             title="Hentai",
-            description=f"Type: {type}",
+            description=f"Type: {str(out)}",
             color=discord.Color.blue())
 
         # add img
