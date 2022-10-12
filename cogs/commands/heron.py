@@ -1,5 +1,3 @@
-import sympy as sp
-import os
 import discord
 from discord.ext import commands
 from discord.commands import slash_command, Option
@@ -13,7 +11,7 @@ class Heron(commands.Cog):
     async def info(self, ctx: discord.ApplicationContext,
                    n: Option(int, "Please enter the number you want the root from"),
                    error: Option(int, "Please enter the error you want to have for the root")):
-        def heron(n, error):
+        def heron(n: float, error: float):
             y = (n + n / n) / 2
             while abs(y - n / y) > error:
                 y = (y + n / y) / 2
