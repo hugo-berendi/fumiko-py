@@ -42,11 +42,11 @@ class Nsfw(commands.Cog):
         # create embed named emb
         emb = discord.Embed(
             title="Hentai",
-            description=f"Type: {str(out)}",
+            description=f"Type: {type}",
             color=discord.Color.blue())
 
         # add img
-        emb.set_image(url=f"{img}")
+        emb.set_image(url=f"{str(out)}")
 
         # add timestamp to emb
         emb.timestamp = discord.utils.utcnow()
