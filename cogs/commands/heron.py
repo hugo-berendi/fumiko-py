@@ -19,7 +19,7 @@ class Heron(commands.Cog):
 
 		# create embed named emb
 		emb = discord.Embed(
-			title="Graph",
+			title="Root with heron method",
 			description=f"```\n{heron(n, error)}\n```",
 			color=discord.Color.blue())
 
