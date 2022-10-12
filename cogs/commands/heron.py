@@ -9,9 +9,9 @@ class Heron(commands.Cog):
 		self.bot = bot
 
 	@slash_command(description="Calcs a root with the heron method", name="heron")
-	async def info(self, ctx: discord.ApplicationContext, n: Option(float, "Please enter the number you want the root from"), error: Option(float, "Please enter the error you want to have for the root")):
+	async def info(self, ctx: discord.ApplicationContext, n: Option(int, "Please enter the number you want the root from"), error: Option(int, "Please enter the error you want to have for the root")):
 
-		def heron(n: float, error: float):
+		def heron(n, error):
 			y = (n + n / n) / 2
 			while abs(y - n / y) > error:
 				y = (y + n / y) / 2
