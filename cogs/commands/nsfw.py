@@ -40,7 +40,7 @@ class Nsfw(commands.Cog):
 
         # create embed named emb
         emb = discord.Embed(
-            title="Hentai",
+            title="NSFW",
             description=f"Type: {type}",
             color=discord.Color.blue())
 
