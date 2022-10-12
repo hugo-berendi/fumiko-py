@@ -8,7 +8,7 @@ class Report(commands.Cog):
         self.bot = bot
 
     @slash_command(description="Report something", name="report")
-    async def report(self, ctx: discord.ApplicationContext, message: Option(discord.Message, 'Message')):
+    async def report(self, ctx: discord.ApplicationContext, message: Option(str, 'Message')):
 
         class MyModal(discord.ui.Modal):
             def __init__(self, *args, **kwargs) -> None:
