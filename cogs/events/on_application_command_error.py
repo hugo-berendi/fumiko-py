@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class Ready(commands.Cog):
+class CmdError(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 
@@ -19,4 +19,4 @@ class Ready(commands.Cog):
             await ctx.respond(embed=emb)
 
 def setup(bot):
-	bot.add_cog(Ready(bot))
+	bot.add_cog(CmdError(bot))
