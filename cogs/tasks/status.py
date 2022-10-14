@@ -16,10 +16,11 @@ class Status(commands.Cog):
         stati = [
             discord.Status.idle,
             discord.Status.dnd,
-            discord.Status.online
+            discord.Status.online,
+            discord.Status.streaming
         ]
         activities = [
-            discord.Game("by Kamachi#2491"),
+            discord.Game('by Kamachi')
             discord.Game(f"mit {len(self.bot.guilds)} servern")
         ]
 
