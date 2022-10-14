@@ -19,7 +19,7 @@ cog_dirs = [f.path for f in os.scandir("./cogs") if f.is_dir()]
 for cog_dir in cog_dirs:
     for filename in os.listdir(f"{cog_dir}"):
         if filename.endswith(".py"):
-            bot.load_extension(f"cogs.{cog_dir}.{filename[:-3]}")
+            bot.load_extension(f"cogs.{cog_dir.split('/')[-1]}.{filename[:-3]}")
 
 # run the bot
 bot.run(os.environ.get("TOKEN"))
