@@ -11,13 +11,12 @@ class Status(commands.Cog):
     async def on_ready(self):
         self.status.start()
 
-    @tasks.loop(seconds=20)
+    @tasks.loop(minutes=2)
     async def status(self):
         stati = [
             discord.Status.idle,
             discord.Status.dnd,
-            discord.Status.online,
-            discord.Status.streaming
+            discord.Status.online
         ]
         activities = [
             discord.Game("by Kamachi"),

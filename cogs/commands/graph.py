@@ -26,7 +26,7 @@ class Graph(commands.Cog):
             # create embed named emb
             emb = discord.Embed(
                 title="Graph",
-                description=f"```python\ny={function}\n```",
+                description=f"```python\nf(x)={function}\n```",
                 color=discord.Color.blue())
 
             # add output
