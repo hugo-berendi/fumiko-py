@@ -21,7 +21,7 @@ class Status(commands.Cog):
         activities = [
             discord.Game("by Kamachi"),
             discord.Game(f"mit {len(self.bot.guilds)} servern"),
-            discord.Game(f"mit {len(self.bot.users)} usern")
+            discord.Game(f"mit {len(self.bot.get_all_members())} usern")
         ]
 
         await self.bot.change_presence(status=stasis[numpy.random.randint(0, len(stasis))],
