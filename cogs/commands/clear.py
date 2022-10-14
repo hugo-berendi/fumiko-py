@@ -11,7 +11,7 @@ class Clear(commands.Cog):
     async def info(self, ctx: discord.ApplicationContext, amount: Option(int, "Amount of messages you want to delete")):
         await ctx.defer()
         z = await ctx.channel.purge(limit=amount)
-        await ctx.respond(f"I have deleted {len(z)} messages")
+        await ctx.respond(f"I have deleted {len(await z)} messages")
 
 def setup(bot):
     bot.add_cog(Clear(bot))
