@@ -1,10 +1,10 @@
-from discord import Status, Game, Bot
+import discord
 import numpy
 from discord.ext import commands, tasks
 
 
 class Status(commands.Cog):
-    def __init__(self, bot: Bot):
+    def __init__(self, bot: discord.Bot):
         self.bot = bot
 
     @commands.Cog.listener()
@@ -14,18 +14,17 @@ class Status(commands.Cog):
     @tasks.loop(seconds=20)
     async def status(self):
         stati = [
-            Status.idle,
-            Status.dnd,
-            Status.online
+            discord.Status.idle,
+            discord.Status.dnd,
+            discord.Status.online
         ]
         activities = [
-            Game("by Kamachi#2491"),
-            Game(f"mit {len(self.bot.guilds)} servern")
+            discord.Game("by Kamachi#2491"),
+            discord.Game(f"mit {len(self.bot.guilds)} servern")
         ]
 
         await self.bot.change_presence(status=stati[numpy.random.randint(0, len(stati))],
                                        activity=activities[numpy.random.randint(0, len(activities))])
-
 
 def setup(bot):
     bot.add_cog(Status(bot))
