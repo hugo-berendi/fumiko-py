@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+          "name": "run",
+          "type": "python",
+          "pythonInterpreterPath": "C:/Users/HugoB/AppData/Local/Programs/Python/Python310/python.exe",
+          "arguments": [
+            "main.py"
+          ],
+        }
+    ]
+}
