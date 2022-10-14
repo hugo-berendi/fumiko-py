@@ -13,20 +13,13 @@ bot = discord.Bot(
     debug_guilds=[990521467215171594]
 )
 
-# load events
-for filename in os.listdir("./cogs/events"):
-    if filename.endswith(".py"):
-        bot.load_extension(f"cogs.events.{filename[:-3]}")
+cog_dirs = [f.path for f in os.scandir("./cogs") if f.is_dir()]
 
-# load commands
-for filename in os.listdir("./cogs/commands"):
-    if filename.endswith(".py"):
-        bot.load_extension(f"cogs.commands.{filename[:-3]}")
-
-# load commands
-for filename in os.listdir("./cogs/tasks"):
-    if filename.endswith(".py"):
-        bot.load_extension(f"cogs.tasks.{filename[:-3]}")
+# load cogs
+for cog_dir in cog_dirs:
+    for filename in os.listdir(f"./cogs/{cog_dir}"):
+        if filename.endswith(".py"):
+            bot.load_extension(f"cogs.{cog_dir}.{filename[:-3]}")
 
 # run the bot
 bot.run(os.environ.get("TOKEN"))
