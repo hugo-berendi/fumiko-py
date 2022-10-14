@@ -13,17 +13,18 @@ class Status(commands.Cog):
 
     @tasks.loop(minutes=2)
     async def status(self):
-        stati = [
+        stasis = [
             discord.Status.idle,
             discord.Status.dnd,
             discord.Status.online
         ]
         activities = [
             discord.Game("by Kamachi"),
-            discord.Game(f"mit {len(self.bot.guilds)} servern")
+            discord.Game(f"mit {len(self.bot.guilds)} servern"),
+            discord.Game(f"mit {len(self.bot.users)} usern")
         ]
 
-        await self.bot.change_presence(status=stati[numpy.random.randint(0, len(stati))],
+        await self.bot.change_presence(status=stasis[numpy.random.randint(0, len(stasis))],
                                        activity=activities[numpy.random.randint(0, len(activities))])
 
 def setup(bot):
