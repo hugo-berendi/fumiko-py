@@ -8,11 +8,10 @@ class Clear(commands.Cog):
         self.bot = bot
 
     @slash_command(description="Clear all Command", name="clear")
-    async def info(self, ctx: discord.ApplicationContext, number: Option(int, "Amount of messages you want to delete")):
-        mgs = []
-        async for x in self.bot.logs_from(ctx.message.channel, limit=number):
-                  mgs.append(x)
-        await self.bot.delete_messages(mgs)
+    async def info(self, ctx: discord.ApplicationContext, amount: Option(int, "Amount of messages you want to delete")):
+        await ctx.defer()
+        z = await ctx.channel.purge(limit=amount)
+        await ctx.respond(f"I have deleted {len(z)} messages")
 
 def setup(bot):
     bot.add_cog(Clear(bot))
