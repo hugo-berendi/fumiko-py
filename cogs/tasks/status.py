@@ -20,7 +20,7 @@ class Status(commands.Cog):
             discord.Status.streaming
         ]
         activities = [
-            discord.Game('by Kamachi')
+            discord.Game("by Kamachi"),
             discord.Game(f"mit {len(self.bot.guilds)} servern")
         ]
 
