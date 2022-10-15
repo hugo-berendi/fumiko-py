@@ -18,6 +18,7 @@ class CmdError(commands.Cog):
         emb.timestamp = discord.utils.utcnow()
 
         await ctx.respond(embed=emb)
+        print(f"a error occured: \n{error}")
 
 
 def setup(bot):
