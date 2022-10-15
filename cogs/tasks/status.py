@@ -1,5 +1,6 @@
 import discord
 import numpy
+import random
 from discord.ext import commands, tasks
 
 
@@ -30,8 +31,8 @@ class Status(commands.Cog):
             discord.Game(f"mit {len(members)} usern")
         ]
 
-        await self.bot.change_presence(status=stasis[numpy.random.randint(0, len(stasis))],
-                                       activity=activities[numpy.random.randint(0, len(activities))])
+        await self.bot.change_presence(status=random.choice(stasis),
+                                       activity=random.choice(activities))
 
 def setup(bot):
     bot.add_cog(Status(bot))
