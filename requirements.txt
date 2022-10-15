@@ -4,4 +4,3 @@ matplotlib
 sympy
 numpy
 requests
-random
