@@ -18,10 +18,16 @@ class Status(commands.Cog):
             discord.Status.dnd,
             discord.Status.online
         ]
+
+        members = []
+        for guild in self.bot.guilds:
+            for member in guild.members:
+                members.append(member)
+
         activities = [
             discord.Game("by Kamachi"),
             discord.Game(f"mit {len(self.bot.guilds)} servern"),
-            discord.Game(f"mit {len(self.bot.get_all_members())} usern")
+            discord.Game(f"mit {len(members)} usern")
         ]
 
         await self.bot.change_presence(status=stasis[numpy.random.randint(0, len(stasis))],
