@@ -4,4 +4,4 @@ matplotlib
 sympy
 numpy
 requests
-pydest
+aiobungie
