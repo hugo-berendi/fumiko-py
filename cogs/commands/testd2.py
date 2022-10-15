@@ -34,7 +34,7 @@ class Testd2(commands.Cog):
 
         # You can either run it using the client or just asyncio.run(main())
         client.run(main())
-        ctx.respond('suc')
+        await ctx.respond('suc')
 
 def setup(bot):
     bot.add_cog(Testd2(bot))
