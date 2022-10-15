@@ -12,14 +12,14 @@ class Testd2(commands.Cog):
     async def testd2(
             self,
             ctx: discord.ApplicationContext):
-        api_key = '22b29c4bd9a649bfab415322dcca1ec4'
         headers = {
-            'X-API-Key': api_key,
+            'X-API-Key': '22b29c4bd9a649bfab415322dcca1ec4',
             'Content-Type': 'application/json'
         }
         api_url = 'https://www.bungie.net/Platform'
         get_vendor_path = f"/Destiny2/Vendors/"
-        r = requests.post(url=(api_url+get_vendor_path), headers=headers)
+        url = f"{api_url}{get_vendor_path}"
+        r = requests.post(url=url, headers=headers)
         await ctx.respond(f"```\n{r}\n```")
 
 
