@@ -16,7 +16,7 @@ class Testd2(commands.Cog):
         url = f"https://www.bungie.net/Platform/User/GetBungieNetUserById/{userId}/"
         myobjs = {'X-API-Key': '5601a322825c4a75841a3a5f6678'}
         r1 = requests.post(url, headers=myobjs)
-        print(r1.text)
+        await ctx.respond(r1.json())
 
 
 
