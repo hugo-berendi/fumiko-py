@@ -20,7 +20,7 @@ class Testd2(commands.Cog):
         api_url = 'https://www.bungie.net/Platform'
         get_vendor_path = f"/Destiny2/Vendors/"
         r = requests.post(url=(api_url+get_vendor_path), headers=headers)
-        await ctx.respond(f"````\n{r.json()}\n```")
+        await ctx.respond(f"````\n{r}\n```")
 
 
 
