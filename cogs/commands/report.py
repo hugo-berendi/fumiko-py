@@ -1,50 +1,25 @@
-import discord
+from discord import ApplicationContext, InputTextStyle
 from discord.ext import commands
-from discord.commands import slash_command, Option
-
+from discord.commands import slash_command
+from discord.ui import View, InputText
 
 class Report(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @slash_command(description="Report something", name="report")
-    async def report(self, ctx: discord.ApplicationContext, message: Option(str, 'Message')):
+    async def report(self, ctx: ApplicationContext):
+        testinput = InputText(
+            style=InputTextStyle.long,
+            custom_id="report_secret",
+            label="Input your report",
+            max_length=2000)
 
-        class MyModal(discord.ui.Modal):
-            def __init__(self, *args, **kwargs) -> None:
-                super().__init__(
-                    discord.ui.InputText(
-                        label="Short Input",
-                        placeholder="Placeholder Test",
-                    ),
-                    discord.ui.InputText(
-                        label="Longer Input",
-                        value="Longer Value\nSuper Long Value",
-                        style=discord.InputTextStyle.long,
-                    ),
-                    *args,
-                    **kwargs,
-                )
+        view = View()
 
-            async def callback(self, interaction: discord.Interaction):
-                embed = discord.Embed(
-                    title="Your Modal Results",
-                    fields=[
-                        discord.EmbedField(
-                            name="First Input", value=self.children[0].value, inline=False
-                        ),
-                        discord.EmbedField(
-                            name="Second Input", value=self.children[1].value, inline=False
-                        ),
-                    ],
-                    color=discord.Color.random(),
-                )
-                await interaction.response.send_message(embeds=[embed])
+        view.add_item(testinput)
 
-        modal = MyModal(title="Message Command Modal")
-        modal.title = f"Modal for Message ID: {message.id}"
-        await ctx.send_modal(modal)
-
+        await ctx.respond(view=view)
 
 def setup(bot):
     bot.add_cog(Report(bot))
