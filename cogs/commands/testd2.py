@@ -17,21 +17,20 @@ class Testd2(commands.Cog):
         oauth_client_id = 41783
         client = aiobungie.Client(api_key)
         async def main() -> None:
+            # Fetch a charatcer with all its components.
+            # This includes Equimpents, Inventory, Records, etc.
+            async with client.rest:
+                my_warlock = await client.fetch_character(
+                    1,
+                    aiobungie.MembershipType.STEAM,
+                    1,
+                    components=[aiobungie.Component.ALL_CHARACTERS]
+                )
 
-        # Fetch a charatcer with all its components.
-        # This includes Equimpents, Inventory, Records, etc.
-        async with client.rest:
-            my_warlock = await client.fetch_character(
-                1,
-                aiobungie.MembershipType.STEAM,
-                1,
-                components=[aiobungie.Component.ALL_CHARACTERS]
-            )
-
-            for activity in my_warlock.activities:
-                # Check if activity is a raid.
-                if activity.current_mode and activity.current_mode is aiobungie.GameMode.RAID:
-                    ctx.channel.send(activity.avaliable_activities) # All raids for this character.
+                for activity in my_warlock.activities:
+                    # Check if activity is a raid.
+                    if activity.current_mode and activity.current_mode is aiobungie.GameMode.RAID:
+                        ctx.channel.send(activity.avaliable_activities) # All raids for this character.
 
         # You can either run it using the client or just asyncio.run(main())
         client.run(main())
