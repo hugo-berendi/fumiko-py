@@ -13,9 +13,8 @@ class Testd2(commands.Cog):
             self,
             ctx: discord.ApplicationContext):
         api_key = '22b29c4bd9a649bfab415322dcca1ec4'
-        oauth_url = 'https://www.bungie.net/en/OAuth/Authorize'
-        oauth_client_id = 41783
         client = aiobungie.Client(api_key)
+
         async def main() -> None:
             # Fetch a charatcer with all its components.
             # This includes Equimpents, Inventory, Records, etc.
@@ -30,11 +29,12 @@ class Testd2(commands.Cog):
                 for activity in my_warlock.activities:
                     # Check if activity is a raid.
                     if activity.current_mode and activity.current_mode is aiobungie.GameMode.RAID:
-                        ctx.channel.send(activity.avaliable_activities) # All raids for this character.
+                        ctx.channel.send(activity.avaliable_activities)  # All raids for this character.
 
         # You can either run it using the client or just asyncio.run(main())
-        client.run(main())
+        await client.run(main())
         await ctx.respond('suc')
+
 
 def setup(bot):
     bot.add_cog(Testd2(bot))
