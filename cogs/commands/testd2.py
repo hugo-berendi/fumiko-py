@@ -26,3 +26,5 @@ class Testd2(commands.Cog):
 
 def setup(bot):
     bot.add_cog(Testd2(bot))
+
+# TODO: search how 'publlic vendors' work; on google
