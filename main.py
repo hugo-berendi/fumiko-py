@@ -20,8 +20,9 @@ for cog_dir in cog_dirs:
     for filename in os.listdir(f"{cog_dir}"):
         if filename == 'long_responses':
             break
-        if filename.endswith(".py"):
-            bot.load_extension(f"cogs.{cog_dir.split('/')[-1]}.{filename[:-3]}")
+        else:
+            if filename.endswith(".py"):
+                bot.load_extension(f"cogs.{cog_dir.split('/')[-1]}.{filename[:-3]}")
 
 # run the bot
 bot.run(os.environ.get("TOKEN"))
