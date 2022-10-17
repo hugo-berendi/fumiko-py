@@ -13,15 +13,27 @@ class Chatbot(commands.Cog):
             return
         
         if message.channel.id == 991000357842849833:
-            api_key = "i2JPF619bGn1"
-            rs = RandomStuff(api_key=api_key, async_mode=True)
+            try:
+                api_key = "i2JPF619bGn1"
+                rs = RandomStuff(api_key=api_key, async_mode=True)
 
-            input = message.content
+                input = message.content
 
-            res = await rs.get_ai_response(input)
-            await message.reply(res)
+                res = await rs.get_ai_response(input)
+                await message.reply(res)
 
-            rs.close()
+                rs.close()
+            except Exception as error:
+                # create embed named emb
+                emb = discord.Embed(
+                    title="Error",
+                    description=f"```\n{error}\n```",
+                    color=discord.Color.red())
+
+                # add timestamp to emb
+                emb.timestamp = discord.utils.utcnow()
+
+                await message.reply(embed=emb)
 
 
 def setup(bot):
