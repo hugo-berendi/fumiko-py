@@ -15,11 +15,9 @@ class Chatbot(commands.Cog):
         if message.channel.id == 991000357842849833:
             try:
                 api_key = "i2JPF619bGn1"
-                rs = RandomStuff(api_key=api_key, async_mode=True)
+                rs = RandomStuff(api_key=api_key, async_mode=True, dev_name="Kamachi", bot_name="Fumiko")
 
-                input = message.content
-
-                res = await rs.get_ai_response(input)
+                res = await rs.get_ai_response(message.content)
                 await message.reply(res)
 
                 rs.close()
