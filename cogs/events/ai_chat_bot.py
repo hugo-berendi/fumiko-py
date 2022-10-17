@@ -3,7 +3,7 @@ from prsaw import RandomStuff
 from discord.ext import commands
 
 
-class Ready(commands.Cog):
+class Chatbot(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -23,4 +23,4 @@ class Ready(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Ready(bot))
+    bot.add_cog(Chatbot(bot))
