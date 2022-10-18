@@ -22,7 +22,8 @@ for cog_dir in cog_dirs:
             break
         else:
             if filename.endswith(".py"):
-                bot.load_extension(f"cogs.{cog_dir.split('/')[-1]}.{filename[:-3]}")
+                bot.load_extension(
+                    f"cogs.{cog_dir.split('/')[-1]}.{filename[:-3]}")
 
 # run the bot
 bot.run(os.environ.get("TOKEN"))
