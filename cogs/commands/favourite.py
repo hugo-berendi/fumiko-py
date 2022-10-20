@@ -14,7 +14,7 @@ class CogName(commands.Cog):
             title="Graph",
             description=f"{message.content}",
             color=discord.Color.yellow(),
-            timestamp=discord.utils.utcnow()) # type: ignore
+            timestamp=discord.utils.utcnow())
         
         embed.set_author(name=message.author.display_name, icon_url=message.author.display_avatar.url)
         
