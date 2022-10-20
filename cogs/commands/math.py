@@ -5,7 +5,6 @@ import discord
 from discord.ext import commands
 from discord.commands import OptionChoice, Option
 
-
 class Math(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -13,8 +12,7 @@ class Math(commands.Cog):
     math = discord.SlashCommandGroup('math', 'Mathmatics related commands')
 
     @math.command(description="Calcs a graph", name="graph")
-    async def info(self, ctx: discord.ApplicationContext,
-                   function: Option(str, "Please enter a function for the Graph (syntax: x**2)")):
+    async def graph(self, ctx: discord.ApplicationContext, function: Option(str, "Please enter a function for the Graph (syntax: x**2)")):  # type: ignore
 
         x = np.array(range(1, 101))
 
@@ -36,7 +34,7 @@ class Math(commands.Cog):
             emb.set_image(url="attachment://out.png")
 
             # add timestamp to emb
-            emb.timestamp = discord.utils.utcnow()
+            emb.timestamp = discord.utils.utcnow()  # type: ignore
 
             await ctx.respond(file=file, embed=emb)
 
@@ -45,10 +43,10 @@ class Math(commands.Cog):
             os.remove("out.png")
 
     @math.command(description="Calcs a root with the heron method", name="heron")
-    async def info(self, ctx: discord.ApplicationContext,
-                   n: Option(int, "Please enter the number you want the root from"),
-                   error: Option(int, "Please enter the error you want to have for the root")):
-        def heron(n: float, error: float):
+    async def heron(self, ctx: discord.ApplicationContext,
+                    n: Option(int, "Please enter the number you want the root from"),  # type: ignore
+                    error: Option(int, "Please enter the error you want to have for the root")):  # type: ignore
+        def calcheron(n: float, error: float):
             y = (n + n / n) / 2
             while abs(y - n / y) > error:
                 y = (y + n / y) / 2
@@ -57,13 +55,14 @@ class Math(commands.Cog):
         # create embed named emb
         emb = discord.Embed(
             title="Root with heron method",
-            description=f"```\n{heron(n, error)}\n```",
+            description=f"```\n{calcheron(n, error)}\n```",
             color=discord.Color.blue())
 
         # add timestamp to emb
-        emb.timestamp = discord.utils.utcnow()
+        emb.timestamp = discord.utils.utcnow()  # type: ignore
 
         await ctx.respond(embed=emb)
+
 
 def setup(bot):
     bot.add_cog(Math(bot))
