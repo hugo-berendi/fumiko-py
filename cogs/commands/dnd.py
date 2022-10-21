@@ -18,9 +18,9 @@ class Dnd(commands.Cog):
     @dnd.command(name="create", description="Create your dnd character")
     async def create(self,
                     ctx: discord.ApplicationContext,
-                    name: Option(str, "Please input the name of your character."),
-                    description: Option(str, 'Please describe your character.'),
-                    classs: Option(
+                    Name: Option(str, "Please input the name of your character."),
+                    Description: Option(str, 'Please describe your character.'),
+                    Class: Option(
                         str,
                         description='Choose the class of your character.',
                         choices=[
@@ -43,9 +43,9 @@ class Dnd(commands.Cog):
         dnd_char = {
             "_id":         ctx.author.id,
             "owner":       f"{ctx.author.name}#{ctx.author.discriminator}",
-            "name":        name,
-            "description": description,
-            "class":       classs
+            "name":        Name,
+            "description": Description,
+            "class":       Class
         }
 
         # cmd actions
@@ -59,7 +59,26 @@ class Dnd(commands.Cog):
                 upsert=True
         )
 
-        await ctx.respond('I hope it worked xD')
+        char = dnd_chars.find_one({"_id": ctx.author.id})
+
+        # create embed named emb
+        emb = discord.Embed(
+                title=f"Infos about {ctx.author.name}'s character",
+                description="",
+                color=ctx.author.color)
+
+        # add fields to emb
+        emb.add_field(name="Name", value=char.get("name"), inline=False)
+        emb.add_field(name="Description", value=char.get("description"), inline=False)
+        emb.add_field(name="Class", value=char.get("class"), inline=False)
+
+        # add footer to emb
+        emb.set_footer(text="Bot by: Kamachi#2491")
+
+        # add timestamp to emb
+        emb.timestamp = discord.utils.utcnow()
+
+        await ctx.respond(embed=emb)
 
 def setup(bot):
     bot.add_cog(Dnd(bot))
