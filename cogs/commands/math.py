@@ -46,7 +46,7 @@ class Math(commands.Cog):
     async def heron(self, ctx: discord.ApplicationContext,
                     n: Option(int, "Please enter the number you want the root from"),  # type: ignore
                     error: Option(int, "Please enter the error you want to have for the root")):  # type: ignore
-        def calcheron(n: float, error: float):
+        def heron(n: float, error: float):
             y = (n + n / n) / 2
             while abs(y - n / y) > error:
                 y = (y + n / y) / 2
@@ -55,7 +55,7 @@ class Math(commands.Cog):
         # create embed named emb
         emb = discord.Embed(
             title="Root with heron method",
-            description=f"```\n{calcheron(n, error)}\n```",
+            description=f"```\n{heron(n, error)}\n```",
             color=discord.Color.blue())
 
         # add timestamp to emb
