@@ -37,7 +37,7 @@ class Dnd(commands.Cog):
                             OptionChoice(name='Wizard', value='wizard')
                         ])):  # type: ignore
         # init mongodb
-        client = pymongo.MongoClient(f"mongodb+srv://hugob:{os.environ.get('MONGODB_TOKEN')}@cluster0.21jxy.mongodb.net/?retryWrites=true&w=majority")
+        client = pymongo.MongoClient(os.environ.get('MONGOURI'))
         db = client['Fumiko']
         dnd_chars = db['dnd_chars']
         dnd_char = {
