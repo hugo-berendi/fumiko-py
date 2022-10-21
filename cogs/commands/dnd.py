@@ -49,7 +49,8 @@ class Dnd(commands.Cog):
                 {
                     "_id": ctx.author.id
                 },
-                dnd_char
+                dnd_char,
+                upsert=True
         )
 
         await ctx.respond('I hope it worked xD')
