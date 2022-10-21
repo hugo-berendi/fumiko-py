@@ -59,8 +59,6 @@ class Dnd(commands.Cog):
                 upsert=True
         )
 
-        char = dnd_chars.find_one({"_id": ctx.author.id})
-
         # create embed named emb
         emb = discord.Embed(
                 title=f"Infos about {ctx.author.name}'s character",
@@ -68,9 +66,9 @@ class Dnd(commands.Cog):
                 color=ctx.author.color)
 
         # add fields to emb
-        emb.add_field(name="Name", value=char.get("name"), inline=False)
-        emb.add_field(name="Description", value=char.get("description"), inline=False)
-        emb.add_field(name="Class", value=char.get("class"), inline=False)
+        emb.add_field(name="Name", value=Name, inline=False)
+        emb.add_field(name="Description", value=Description, inline=False)
+        emb.add_field(name="Class", value=Class, inline=False)
 
         # add footer to emb
         emb.set_footer(text="Bot by: Kamachi#2491")
