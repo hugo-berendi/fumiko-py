@@ -45,7 +45,7 @@ class Dnd(commands.Cog):
         }
 
         # cmd actions
-        dnd_chars.find_one_and_update(
+        dnd_chars.find_one_and_replace(
                 {
                     "_id": ctx.author.id
                 },
