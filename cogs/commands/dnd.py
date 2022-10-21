@@ -1,5 +1,3 @@
-import matplotlib.pyplot as plt
-import numpy as np
 import os
 import discord
 import pymongo
@@ -11,8 +9,7 @@ class Dnd(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    dnd = discord.SlashCommandGroup(
-        'dnd', 'Dungeons & Dragons related commands')
+    dnd = discord.SlashCommandGroup('dnd', 'Dungeons & Dragons related commands')
 
     @dnd.command(name="create", description="Create your dnd character")
     async def create(self,
@@ -54,7 +51,8 @@ class Dnd(commands.Cog):
                 },
                 dnd_char
         )
+
         await ctx.respond('I hope it worked xD')
 
-    def setup(bot):
-        bot.add_cog(Dnd(bot))
+def setup(bot):
+    bot.add_cog(Dnd(bot))
