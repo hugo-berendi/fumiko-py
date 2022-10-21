@@ -3,6 +3,10 @@ import discord
 import pymongo
 from discord.ext import commands
 from discord.commands import OptionChoice, Option
+from dotenv import load_dotenv
+
+# load .env vars
+load_dotenv()
 
 
 class Dnd(commands.Cog):
