@@ -11,10 +11,10 @@ class DnD(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    math = discord.SlashCommandGroup(
+    dnd = discord.SlashCommandGroup(
         'dnd', 'Dungeons & Dragons related commands')
 
-    @math.command(name="create", description="Create your dnd character")
+    @dnd.command(name="create", description="Create your dnd character")
     async def create(self,
                     ctx: discord.ApplicationContext,
                     name: Option(str, "Please input the name of your character."),
