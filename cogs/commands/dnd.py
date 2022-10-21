@@ -7,7 +7,7 @@ from discord.ext import commands
 from discord.commands import OptionChoice, Option
 
 
-class DnD(commands.Cog):
+class Dnd(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -54,7 +54,7 @@ class DnD(commands.Cog):
                 },
                 dnd_char
         )
-        ctx.respond('I hope it worked xD')
+        await ctx.respond('I hope it worked xD')
 
     def setup(bot):
-        bot.add_cog(DnD(bot))
+        bot.add_cog(Dnd(bot))
