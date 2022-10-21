@@ -49,7 +49,7 @@ class Dnd(commands.Cog):
         }
 
         # cmd actions
-        await dnd_chars.find_one_and_update(
+        dnd_chars.find_one_and_update(
                 {
                     "_id": ctx.author.id
                 },
