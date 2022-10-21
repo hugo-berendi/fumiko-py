@@ -18,9 +18,9 @@ class Dnd(commands.Cog):
     @dnd.command(name="create", description="Create your dnd character")
     async def create(self,
                     ctx: discord.ApplicationContext,
-                    Name: Option(str, "Please input the name of your character."),
-                    Description: Option(str, 'Please describe your character.'),
-                    Class: Option(
+                    name: Option(str, "Please input the name of your character."),
+                    description: Option(str, 'Please describe your character.'),
+                    group: Option(
                         str,
                         description='Choose the class of your character.',
                         choices=[
@@ -43,9 +43,9 @@ class Dnd(commands.Cog):
         dnd_char = {
             "_id":         ctx.author.id,
             "owner":       f"{ctx.author.name}#{ctx.author.discriminator}",
-            "name":        Name,
-            "description": Description,
-            "class":       Class
+            "name":        name,
+            "description": description,
+            "group":       group
         }
 
         # cmd actions
@@ -66,9 +66,9 @@ class Dnd(commands.Cog):
                 color=ctx.author.color)
 
         # add fields to emb
-        emb.add_field(name="Name", value=Name, inline=False)
-        emb.add_field(name="Description", value=Description, inline=False)
-        emb.add_field(name="Class", value=Class, inline=False)
+        emb.add_field(name="Name", value=name, inline=False)
+        emb.add_field(name="Description", value=description, inline=False)
+        emb.add_field(name="Group", value=group, inline=False)
 
         # add footer to emb
         emb.set_footer(text="Bot by: Kamachi#2491")
