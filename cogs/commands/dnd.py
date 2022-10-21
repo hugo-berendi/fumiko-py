@@ -42,7 +42,7 @@ class Dnd(commands.Cog):
         dnd_chars = db['dnd_chars']
         dnd_char = {
             "_id":         ctx.author.id,
-            "owner":       ctx.author.display_name,
+            "owner":       ctx.author.name,
             "name":        name,
             "description": description,
             "class":       classs
