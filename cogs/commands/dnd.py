@@ -49,11 +49,13 @@ class Dnd(commands.Cog):
         }
 
         # cmd actions
-        dnd_chars.find_one_and_replace(
+        await dnd_chars.find_one_and_update(
                 {
                     "_id": ctx.author.id
                 },
-                dnd_char,
+                {
+                    "$set": dnd_char
+                },
                 upsert=True
         )
 
