@@ -50,7 +50,7 @@ class Dnd(commands.Cog):
         }
 
         population = ['S', 'A', 'B', 'C', 'D', 'E']
-        weights = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
+        weights = [0.005, 0.025, 0.07, 0.1, 0.3, 0.5]
 
         random.choices(population=population, weights=weights)
 
