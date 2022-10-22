@@ -41,16 +41,24 @@ class Dnd(commands.Cog):
         client = pymongo.MongoClient(os.environ.get('MONGOURI'))
         db = client['Fumiko']
         dnd_chars = db['dnd_chars']
+
+        population = ['S', 'A', 'B', 'C', 'D', 'E']
+        weights = [0.005, 0.025, 0.07, 0.1, 0.3, 0.5]
+
         dnd_char = {
             "_id":         ctx.author.id,
             "owner":       f"{ctx.author.name}#{ctx.author.discriminator}",
             "name":        name,
             "description": description,
-            "group":       group
+            "group":       group,
+            "HP": random.choices(population=population, weights=weights),
+            "STRENGTH": random.choices(population=population, weights=weights),
+            "DEXTERITY": random.choices(population=population, weights=weights),
+            "CONSTITUTION": random.choices(population=population, weights=weights),
+            "INTELLIGENCE": random.choices(population=population, weights=weights),
+            "WISDOM": random.choices(population=population, weights=weights),
+            "CHARISMA": random.choices(population=population, weights=weights),
         }
-
-        population = ['S', 'A', 'B', 'C', 'D', 'E']
-        weights = [0.005, 0.025, 0.07, 0.1, 0.3, 0.5]
 
         random.choices(population=population, weights=weights)
 
@@ -72,9 +80,16 @@ class Dnd(commands.Cog):
                 color=ctx.author.color)
 
         # add fields to emb
-        emb.add_field(name="Name", value=name, inline=False)
-        emb.add_field(name="Description", value=description, inline=False)
-        emb.add_field(name="Group", value=group, inline=False)
+        emb.add_field(name="Name", value=dnd_char["name"], inline=False)
+        emb.add_field(name="Description", value=dnd_char["description"], inline=False)
+        emb.add_field(name="Group", value=dnd_char["group"], inline=False)
+        emb.add_field(name="HP", value=dnd_char["HP"], inline=True)
+        emb.add_field(name="STRENGTH", value=dnd_char["STRENGTH"], inline=True)
+        emb.add_field(name="DEXTERITY", value=dnd_char["DEXTERITY"], inline=True)
+        emb.add_field(name="CONSTITUTION", value=dnd_char["CONSTITUTION"], inline=True)
+        emb.add_field(name="INTELLIGENCE", value=dnd_char["INTELLIGENCE"], inline=True)
+        emb.add_field(name="WISDOM", value=dnd_char["WISDOM"], inline=True)
+        emb.add_field(name="CHARISMA", value=dnd_char["CHARISMA"], inline=True)
 
         # add footer to emb
         emb.set_footer(text="Bot by: Kamachi#2491")
@@ -82,10 +97,7 @@ class Dnd(commands.Cog):
         # add timestamp to emb
         emb.timestamp = discord.utils.utcnow()
 
-        population = ['S', 'A', 'B', 'C', 'D', 'E']
-        weights = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
-
-        await ctx.respond(random.choices(population=population, weights=weights), embed=emb)
+        await ctx.respond(embed=emb)
 
 def setup(bot):
     bot.add_cog(Dnd(bot))
