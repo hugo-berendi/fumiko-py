@@ -1,6 +1,7 @@
 import os
 import discord
 import pymongo
+import random
 from discord.ext import commands
 from discord.commands import OptionChoice, Option
 from dotenv import load_dotenv
@@ -48,6 +49,11 @@ class Dnd(commands.Cog):
             "group":       group
         }
 
+        population = ['S', 'A', 'B', 'C', 'D', 'E']
+        weights = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
+
+        random.choices(population=population, weights=weights)
+
         # cmd actions
         dnd_chars.find_one_and_update(
                 {
@@ -76,7 +82,10 @@ class Dnd(commands.Cog):
         # add timestamp to emb
         emb.timestamp = discord.utils.utcnow()
 
-        await ctx.respond(embed=emb)
+        population = ['S', 'A', 'B', 'C', 'D', 'E']
+        weights = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
+
+        await ctx.respond(random.choices(population=population, weights=weights), embed=emb)
 
 def setup(bot):
     bot.add_cog(Dnd(bot))
