@@ -227,12 +227,12 @@ class Dnd(commands.Cog):
                 discord.EmbedField(name="Level", value=dnd_char["Level"], inline=True),
                 discord.EmbedField(name="XP", value=dnd_char["XP"], inline=True),
                 discord.EmbedField(name="HP", value=dnd_char["HP"], inline=True),
-                discord.EmbedField(name="Strength", value=dnd_char["Strength"], inline=True),
-                discord.EmbedField(name="Dexterity", value=dnd_char["Dexterity"], inline=True),
-                discord.EmbedField(name="Constitution", value=dnd_char["Constitution"], inline=True),
-                discord.EmbedField(name="Intelligence", value=dnd_char["Intelligence"], inline=True),
-                discord.EmbedField(name="Wisdom", value=dnd_char["Wisdom"], inline=True),
-                discord.EmbedField(name="Charisma", value=dnd_char["Charisma"], inline=True),
+                discord.EmbedField(name="Strength", value=dnd_char["Stats"]["Strength"], inline=True),
+                discord.EmbedField(name="Dexterity", value=dnd_char["Stats"]["Dexterity"], inline=True),
+                discord.EmbedField(name="Constitution", value=dnd_char["Stats"]["Constitution"], inline=True),
+                discord.EmbedField(name="Intelligence", value=dnd_char["Stats"]["Intelligence"], inline=True),
+                discord.EmbedField(name="Wisdom", value=dnd_char["Stats"]["Wisdom"], inline=True),
+                discord.EmbedField(name="Charisma", value=dnd_char["Stats"]["Charisma"], inline=True),
             ],
             timestamp=discord.utils.utcnow())
         emb.set_footer(text="Bot by: Kamachi#2491")
