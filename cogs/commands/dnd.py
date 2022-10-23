@@ -196,8 +196,8 @@ class Dnd(commands.Cog):
                 "Race": character_race,
                 "Level": 1,
                 "XP": 0,
-                "HP": init_dnd_char_group(group)
-                "Stats": init_dnd_char_race(race)
+                "HP": init_dnd_char_group(group),
+                "Stats": init_dnd_char_race(race),
             }
             return dnd_char
 
