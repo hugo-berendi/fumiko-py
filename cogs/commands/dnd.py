@@ -39,18 +39,18 @@ class Dnd(commands.Cog):
                              OptionChoice(name='Wizard', value='wizard')
                          ]),
                      character_race: Option(
-                             str,
-                             description='Choose a race for your character.',
-                             choices=[
-                                 OptionChoice(name='Dragonborn', value='dragonborn'),
-                                 OptionChoice(name='Dwarf', value='dwarf'),
-                                 OptionChoice(name='Elf', value='elf'),
-                                 OptionChoice(name='Half-Elf', value='half-elf'),
-                                 OptionChoice(name='Halfling', value='halfling'),
-                                 OptionChoice(name='Half-Orc', value='half-orc'),
-                                 OptionChoice(name='Human', value='human'),
-                                 OptionChoice(name='Tiefling', value='tiefling'),
-                             ])):
+                         str,
+                         description='Choose a race for your character.',
+                         choices=[
+                             OptionChoice(name='Dragonborn', value='dragonborn'),
+                             OptionChoice(name='Dwarf', value='dwarf'),
+                             OptionChoice(name='Elf', value='elf'),
+                             OptionChoice(name='Half-Elf', value='half-elf'),
+                             OptionChoice(name='Halfling', value='halfling'),
+                             OptionChoice(name='Half-Orc', value='half-orc'),
+                             OptionChoice(name='Human', value='human'),
+                             OptionChoice(name='Tiefling', value='tiefling'),
+                         ])):
         # init mongodb
         client = pymongo.MongoClient(os.environ.get('MONGOURI'))
         db = client['Fumiko']
@@ -226,13 +226,8 @@ class Dnd(commands.Cog):
                 discord.EmbedField(name="Background", value=dnd_char["Background"], inline=False),
                 discord.EmbedField(name="Level", value=dnd_char["Level"], inline=True),
                 discord.EmbedField(name="XP", value=dnd_char["XP"], inline=True),
-                discord.EmbedField(name="HP", value=dnd_char["HP"], inline=True),
-                discord.EmbedField(name="Strength", value=dnd_char["Stats"]["Strength"], inline=True),
-                discord.EmbedField(name="Dexterity", value=dnd_char["Stats"]["Dexterity"], inline=True),
-                discord.EmbedField(name="Constitution", value=dnd_char["Stats"]["Constitution"], inline=True),
-                discord.EmbedField(name="Intelligence", value=dnd_char["Stats"]["Intelligence"], inline=True),
-                discord.EmbedField(name="Wisdom", value=dnd_char["Stats"]["Wisdom"], inline=True),
-                discord.EmbedField(name="Charisma", value=dnd_char["Stats"]["Charisma"], inline=True),
+                discord.EmbedField(name='Stats',
+                                   value=f'HP: {dnd_char["HP"]}\nStrength: {dnd_char["Stats"]["Strength"]}\nDexterity: {dnd_char["Stats"]["Dexterity"]}\nConstitution: {dnd_char["Stats"]["Constitution"]}\nIntelligence: {dnd_char["Stats"]["Intelligence"]}\nWisdom: {dnd_char["Stats"]["Wisdom"]}\nCharisma: {dnd_char["Stats"]["Charisma"]}')
             ],
             timestamp=discord.utils.utcnow())
         emb.set_footer(text="Bot by: Kamachi#2491")
