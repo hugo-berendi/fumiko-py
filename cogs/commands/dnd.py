@@ -37,20 +37,19 @@ class Dnd(commands.Cog):
                              OptionChoice(name='Warlock', value='warlock'),
                              OptionChoice(name='Wizard', value='wizard')
                          ]),
-                     race: Option(
-                         str,
-                         description='Choose a race for your character.',
-                         choices=[
-                             OptionChoice(name='Dragonborn', value='dragonborn'),
-                             OptionChoice(name='Dwarf', value='dwarf'),
-                             OptionChoice(name='Elf', value='elf'),
-                             OptionChoice(name='Half-Elf', value='half-elf'),
-                             OptionChoice(name='Halfling', value='halfling'),
-                             OptionChoice(name='Half-Orc', value='half-orc'),
-                             OptionChoice(name='Human', value='human'),
-                             OptionChoice(name='Tiefling', value='tiefling'),
-                         ]),
-                     )):
+                         race: Option(
+                             str,
+                             description='Choose a race for your character.',
+                             choices=[
+                                 OptionChoice(name='Dragonborn', value='dragonborn'),
+                                 OptionChoice(name='Dwarf', value='dwarf'),
+                                 OptionChoice(name='Elf', value='elf'),
+                                 OptionChoice(name='Half-Elf', value='half-elf'),
+                                 OptionChoice(name='Halfling', value='halfling'),
+                                 OptionChoice(name='Half-Orc', value='half-orc'),
+                                 OptionChoice(name='Human', value='human'),
+                                 OptionChoice(name='Tiefling', value='tiefling'),
+                             ])):
         # init mongodb
         client = pymongo.MongoClient(os.environ.get('MONGOURI'))
         db = client['Fumiko']
