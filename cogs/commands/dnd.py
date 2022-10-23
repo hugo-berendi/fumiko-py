@@ -30,6 +30,7 @@ class Dnd(commands.Cog):
                              OptionChoice(name='Cleric', value='cleric'),
                              OptionChoice(name='Druid', value='druid'),
                              OptionChoice(name='Fighter', value='fighter'),
+                             OptionChoice(name='Monk', value='monk'),
                              OptionChoice(name='Paladin', value='paladin'),
                              OptionChoice(name='Ranger', value='ranger'),
                              OptionChoice(name='Rogue', value='rogue'),
@@ -55,23 +56,152 @@ class Dnd(commands.Cog):
         db = client['Fumiko']
         dnd_chars = db['dnd_chars']
 
-        dnd_char = {
-            "_id": ctx.author.id,
-            "player_name": f"{ctx.author.name}#{ctx.author.discriminator}",
-            "Name": name,
-            "Background": background,
-            "Group": character_class,
-            "Race": character_race,
-            "Level": 1,
-            "XP": 0,
-            "HP": 9,
-            "Strength": 15,
-            "Dexterity": 14,
-            "Constitution": 13,
-            "Intelligence": 12,
-            "Wisdom": 10,
-            "Charisma": 8,
-        }
+        def init_dnd_char_group(group):
+            if group == 'barbarian':
+                hp = 13
+                return hp
+            elif group == 'bard':
+                hp = 9
+                return hp
+            elif group == 'cleric':
+                hp = 9
+                return hp
+            elif group == 'druid':
+                hp = 9
+                return hp
+            elif group == 'fighter':
+                hp = 11
+                return hp
+            elif group == 'monk':
+                hp = 9
+                return hp
+            elif group == 'paladin':
+                hp = 11
+                return hp
+            elif group == 'ranger':
+                hp = 11
+                return hp
+            elif group == 'rogue':
+                hp = 9
+                return hp
+            elif group == 'sorcerer':
+                hp = 7
+                return hp
+            elif group == 'warlock':
+                hp = 9
+                return hp
+            elif group == 'wizard':
+                hp = 7
+                return hp
+
+        def init_dnd_char_race(race):
+            if race == 'dragonborn':
+                stats = {
+                    "Strength": 17,
+                    "Dexterity": 14,
+                    "Constitution": 13,
+                    "Intelligence": 12,
+                    "Wisdom": 10,
+                    "Charisma": 9,
+                }
+                return stats
+            elif race == 'dwarf':
+                stats = {
+                    "Strength": 15,
+                    "Dexterity": 14,
+                    "Constitution": 15,
+                    "Intelligence": 12,
+                    "Wisdom": 10,
+                    "Charisma": 8,
+                }
+                return stats
+            elif race == 'elf':
+                stats = {
+                    "Strength": 15,
+                    "Dexterity": 16,
+                    "Constitution": 13,
+                    "Intelligence": 12,
+                    "Wisdom": 10,
+                    "Charisma": 8,
+                }
+                return stats
+            elif race == 'gnome':
+                stats = {
+                    "Strength": 15,
+                    "Dexterity": 14,
+                    "Constitution": 13,
+                    "Intelligence": 14,
+                    "Wisdom": 10,
+                    "Charisma": 8,
+                }
+                return stats
+            elif race == 'half-elf':
+                stats = {
+                    "Strength": 15,
+                    "Dexterity": 15,
+                    "Constitution": 14,
+                    "Intelligence": 12,
+                    "Wisdom": 10,
+                    "Charisma": 10,
+                }
+                return stats
+            elif race == 'halfling':
+                stats = {
+                    "Strength": 15,
+                    "Dexterity": 16,
+                    "Constitution": 13,
+                    "Intelligence": 12,
+                    "Wisdom": 10,
+                    "Charisma": 8,
+                }
+                return stats
+            elif race == 'half-orc':
+                stats = {
+                    "Strength": 17,
+                    "Dexterity": 14,
+                    "Constitution": 14,
+                    "Intelligence": 12,
+                    "Wisdom": 10,
+                    "Charisma": 8,
+                }
+                return stats
+            elif race == 'human':
+                stats = {
+                    "Strength": 16,
+                    "Dexterity": 15,
+                    "Constitution": 14,
+                    "Intelligence": 13,
+                    "Wisdom": 11,
+                    "Charisma": 9,
+                }
+                return stats
+            elif race == 'tiefling':
+                stats = {
+                    "Strength": 15,
+                    "Dexterity": 14,
+                    "Constitution": 13,
+                    "Intelligence": 13,
+                    "Wisdom": 10,
+                    "Charisma": 10,
+                }
+                return stats
+
+        def init_dnd_char(group: str, race: str):
+            dnd_char = {
+                "_id": ctx.author.id,
+                "player_name": f"{ctx.author.name}#{ctx.author.discriminator}",
+                "Name": name,
+                "Background": background,
+                "Group": character_class,
+                "Race": character_race,
+                "Level": 1,
+                "XP": 0,
+                "HP": init_dnd_char_group(group)
+                "Stats": init_dnd_char_race(race)
+            }
+            return dnd_char
+
+        dnd_char = init_dnd_char(group=character_class, race=character_race)
 
         # cmd actions
         dnd_chars.find_one_and_update(
