@@ -216,7 +216,7 @@ class Dnd(commands.Cog):
 
         # create embed named emb
         emb = discord.Embed(
-            title=f"Infos about {ctx.author.name}'s character",
+            title=f"{ctx.author.name}'s character sheet",
             description="",
             color=ctx.author.color,
             fields=[
