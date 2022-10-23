@@ -225,9 +225,9 @@ class Dnd(commands.Cog):
                 discord.EmbedField(name="Race", value=dnd_char["Race"], inline=True),
                 discord.EmbedField(name="Background", value=dnd_char["Background"], inline=False),
                 discord.EmbedField(name="Level", value=dnd_char["Level"], inline=True),
-                discord.EmbedField(name="XP", value=dnd_char["XP"], inline=True),
                 discord.EmbedField(name='Stats',
-                                   value=f'HP: {dnd_char["HP"]}\nStrength: {dnd_char["Stats"]["Strength"]}\nDexterity: {dnd_char["Stats"]["Dexterity"]}\nConstitution: {dnd_char["Stats"]["Constitution"]}\nIntelligence: {dnd_char["Stats"]["Intelligence"]}\nWisdom: {dnd_char["Stats"]["Wisdom"]}\nCharisma: {dnd_char["Stats"]["Charisma"]}')
+                                   value=f'HP: {dnd_char["HP"]}\nStrength: {dnd_char["Stats"]["Strength"]}\nDexterity: {dnd_char["Stats"]["Dexterity"]}\nConstitution: {dnd_char["Stats"]["Constitution"]}\nIntelligence: {dnd_char["Stats"]["Intelligence"]}\nWisdom: {dnd_char["Stats"]["Wisdom"]}\nCharisma: {dnd_char["Stats"]["Charisma"]}',
+                                   inline=True)
             ],
             timestamp=discord.utils.utcnow())
         emb.set_footer(text="Bot by: Kamachi#2491")
