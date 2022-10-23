@@ -90,8 +90,8 @@ class Dnd(commands.Cog):
             description="",
             color=ctx.author.color,
             fields=[
-                discord.EmbedField(name="Name", value=dnd_char["Name"], inline=False),
-                discord.EmbedField(name="Background", value=dnd_char["Background"], inline=False),
+                discord.EmbedField(name="Name", value=dnd_char["Name"], inline=True),
+                discord.EmbedField(name="Background", value=dnd_char["Background"], inline=True),
                 discord.EmbedField(name="Group", value=dnd_char["Group"], inline=False),
                 discord.EmbedField(name="Race", value=dnd_char["Race"], inline=False),
                 discord.EmbedField(name="Level", value=dnd_char["Level"], inline=True),
