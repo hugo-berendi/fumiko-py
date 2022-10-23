@@ -21,7 +21,7 @@ class Dnd(commands.Cog):
                      ctx: discord.ApplicationContext,
                      name: Option(str, "Please input the name of your character."),
                      background: Option(str, 'Please write a background for your character.'),
-                     group: Option(
+                     character_class: Option(
                          str,
                          description='Choose the class of your character.',
                          choices=[
@@ -37,7 +37,7 @@ class Dnd(commands.Cog):
                              OptionChoice(name='Warlock', value='warlock'),
                              OptionChoice(name='Wizard', value='wizard')
                          ]),
-                         race: Option(
+                     character_race: Option(
                              str,
                              description='Choose a race for your character.',
                              choices=[
@@ -91,9 +91,9 @@ class Dnd(commands.Cog):
             color=ctx.author.color,
             fields=[
                 discord.EmbedField(name="Name", value=dnd_char["Name"], inline=True),
-                discord.EmbedField(name="Background", value=dnd_char["Background"], inline=True),
-                discord.EmbedField(name="Group", value=dnd_char["Group"], inline=False),
-                discord.EmbedField(name="Race", value=dnd_char["Race"], inline=False),
+                discord.EmbedField(name="Group", value=dnd_char["Group"], inline=True),
+                discord.EmbedField(name="Race", value=dnd_char["Race"], inline=True),
+                discord.EmbedField(name="Background", value=dnd_char["Background"], inline=False),
                 discord.EmbedField(name="Level", value=dnd_char["Level"], inline=True),
                 discord.EmbedField(name="XP", value=dnd_char["XP"], inline=True),
                 discord.EmbedField(name="HP", value=dnd_char["HP"], inline=True),
