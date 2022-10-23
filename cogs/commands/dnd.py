@@ -18,86 +18,98 @@ class Dnd(commands.Cog):
 
     @dnd.command(name="create", description="Create your dnd character")
     async def create(self,
-                    ctx: discord.ApplicationContext,
-                    name: Option(str, "Please input the name of your character."),
-                    description: Option(str, 'Please describe your character.'),
-                    group: Option(
-                        str,
-                        description='Choose the class of your character.',
-                        choices=[
-                            OptionChoice(name='Barbarian', value='barbarian'),
-                            OptionChoice(name='Bard', value='bard'),
-                            OptionChoice(name='Cleric', value='cleric'),
-                            OptionChoice(name='Druid', value='druid'),
-                            OptionChoice(name='Fighter', value='fighter'),
-                            OptionChoice(name='Paladin', value='paladin'),
-                            OptionChoice(name='Ranger', value='ranger'),
-                            OptionChoice(name='Rogue', value='rogue'),
-                            OptionChoice(name='Sorcerer', value='sorcerer'),
-                            OptionChoice(name='Warlock', value='warlock'),
-                            OptionChoice(name='Wizard', value='wizard')
-                        ])):  # type: ignore
+                     ctx: discord.ApplicationContext,
+                     name: Option(str, "Please input the name of your character."),
+                     background: Option(str, 'Please write a background for your character.'),
+                     group: Option(
+                         str,
+                         description='Choose the class of your character.',
+                         choices=[
+                             OptionChoice(name='Barbarian', value='barbarian'),
+                             OptionChoice(name='Bard', value='bard'),
+                             OptionChoice(name='Cleric', value='cleric'),
+                             OptionChoice(name='Druid', value='druid'),
+                             OptionChoice(name='Fighter', value='fighter'),
+                             OptionChoice(name='Paladin', value='paladin'),
+                             OptionChoice(name='Ranger', value='ranger'),
+                             OptionChoice(name='Rogue', value='rogue'),
+                             OptionChoice(name='Sorcerer', value='sorcerer'),
+                             OptionChoice(name='Warlock', value='warlock'),
+                             OptionChoice(name='Wizard', value='wizard')
+                         ]),
+                     race: Option(
+                         str,
+                         description='Choose a race for your character.',
+                         choices=[
+                             OptionChoice(name='Dragonborn', value='dragonborn'),
+                             OptionChoice(name='Dwarf', value='dwarf'),
+                             OptionChoice(name='Elf', value='elf'),
+                             OptionChoice(name='Half-Elf', value='half-elf'),
+                             OptionChoice(name='Halfling', value='halfling'),
+                             OptionChoice(name='Half-Orc', value='half-orc'),
+                             OptionChoice(name='Human', value='human'),
+                             OptionChoice(name='Tiefling', value='tiefling'),
+                         ]),
+                     )):
         # init mongodb
         client = pymongo.MongoClient(os.environ.get('MONGOURI'))
         db = client['Fumiko']
         dnd_chars = db['dnd_chars']
 
-        population = ['S', 'A', 'B', 'C', 'D', 'E']
-        weights = [0.005, 0.025, 0.07, 0.1, 0.3, 0.5]
-
         dnd_char = {
-            "_id":         ctx.author.id,
-            "owner":       f"{ctx.author.name}#{ctx.author.discriminator}",
-            "name":        name,
-            "description": description,
-            "group":       group,
-            "HP": random.choices(population=population, weights=weights),
-            "STRENGTH": random.choices(population=population, weights=weights),
-            "DEXTERITY": random.choices(population=population, weights=weights),
-            "CONSTITUTION": random.choices(population=population, weights=weights),
-            "INTELLIGENCE": random.choices(population=population, weights=weights),
-            "WISDOM": random.choices(population=population, weights=weights),
-            "CHARISMA": random.choices(population=population, weights=weights),
+            "_id": ctx.author.id,
+            "player_name": f"{ctx.author.name}#{ctx.author.discriminator}",
+            "Name": name,
+            "Background": background,
+            "Group": group,
+            "Race": race,
+            "Level": 1,
+            "XP": 0,
+            "HP": 9,
+            "Strength": 15,
+            "Dexterity": 14,
+            "Constitution": 13,
+            "Intelligence": 12,
+            "Wisdom": 10,
+            "Charisma": 8,
         }
-
-        random.choices(population=population, weights=weights)
 
         # cmd actions
         dnd_chars.find_one_and_update(
-                {
-                    "_id": ctx.author.id
-                },
-                {
-                    "$set": dnd_char
-                },
-                upsert=True
+            {
+                "_id": ctx.author.id
+            },
+            {
+                "$set": dnd_char
+            },
+            upsert=True
         )
 
         # create embed named emb
         emb = discord.Embed(
-                title=f"Infos about {ctx.author.name}'s character",
-                description="",
-                color=ctx.author.color)
-
-        # add fields to emb
-        emb.add_field(name="Name", value=dnd_char["name"], inline=False)
-        emb.add_field(name="Description", value=dnd_char["description"], inline=False)
-        emb.add_field(name="Group", value=dnd_char["group"], inline=False)
-        emb.add_field(name="HP", value=dnd_char["HP"], inline=True)
-        emb.add_field(name="STRENGTH", value=dnd_char["STRENGTH"], inline=True)
-        emb.add_field(name="DEXTERITY", value=dnd_char["DEXTERITY"], inline=True)
-        emb.add_field(name="CONSTITUTION", value=dnd_char["CONSTITUTION"], inline=True)
-        emb.add_field(name="INTELLIGENCE", value=dnd_char["INTELLIGENCE"], inline=True)
-        emb.add_field(name="WISDOM", value=dnd_char["WISDOM"], inline=True)
-        emb.add_field(name="CHARISMA", value=dnd_char["CHARISMA"], inline=True)
-
-        # add footer to emb
+            title=f"Infos about {ctx.author.name}'s character",
+            description="",
+            color=ctx.author.color,
+            fields=[
+                discord.EmbedField(name="Name", value=dnd_char["Name"], inline=False),
+                discord.EmbedField(name="Background", value=dnd_char["Background"], inline=False),
+                discord.EmbedField(name="Group", value=dnd_char["Group"], inline=False),
+                discord.EmbedField(name="Race", value=dnd_char["Race"], inline=False),
+                discord.EmbedField(name="Level", value=dnd_char["Level"], inline=True),
+                discord.EmbedField(name="XP", value=dnd_char["XP"], inline=True),
+                discord.EmbedField(name="HP", value=dnd_char["HP"], inline=True),
+                discord.EmbedField(name="Strength", value=dnd_char["Strength"], inline=True),
+                discord.EmbedField(name="Dexterity", value=dnd_char["Dexterity"], inline=True),
+                discord.EmbedField(name="Constitution", value=dnd_char["Constitution"], inline=True),
+                discord.EmbedField(name="Intelligence", value=dnd_char["Intelligence"], inline=True),
+                discord.EmbedField(name="Wisdom", value=dnd_char["Wisdom"], inline=True),
+                discord.EmbedField(name="Charisma", value=dnd_char["Charisma"], inline=True),
+            ],
+            timestamp=discord.utils.utcnow())
         emb.set_footer(text="Bot by: Kamachi#2491")
 
-        # add timestamp to emb
-        emb.timestamp = discord.utils.utcnow()
-
         await ctx.respond(embed=emb)
+
 
 def setup(bot):
     bot.add_cog(Dnd(bot))
