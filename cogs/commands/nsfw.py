@@ -32,16 +32,6 @@ class Nsfw(commands.Cog):
                     OptionChoice(name='Lewd', value='lewd'),
                     OptionChoice(name='😻', value='pussy'),
                 ])):
-        if ctx.channel.
-            # create embed named emb
-            emb = discord.Embed(
-                title="NSFW Error",
-                description="Please use this command in a nsfw channel!",
-                color=discord.Color.red())
-            # add timestamp to emb
-            emb.timestamp = discord.utils.utcnow()
-            await ctx.respond(embed=emb)
-            return 
 
         out_raw = requests.get(f"http://api.nekos.fun:8080/api/{type}/")
         out_raw_json = out_raw.json()
