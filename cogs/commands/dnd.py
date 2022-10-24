@@ -232,15 +232,15 @@ class Dnd(commands.Cog):
                 }
                 return stats
 
-        p = dndm.Player(player_id=ctx.author.id,
-                        name=name,
-                        background=background,
-                        group=character_class,
-                        race=character_race,
-                        hp=init_dnd_char_group(character_class),
-                        lvl=1,
-                        ep=0,
-                        stats=init_dnd_char_race(character_race))
+        p = Player(player_id=ctx.author.id,
+                   name=name,
+                   background=background,
+                   group=character_class,
+                   race=character_race,
+                   hp=init_dnd_char_group(character_class),
+                   lvl=1,
+                   ep=0,
+                   stats=init_dnd_char_race(character_race))
 
         # cmd actions
         dnd_chars.find_one_and_update(
