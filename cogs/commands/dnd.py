@@ -267,10 +267,11 @@ class Dnd(commands.Cog):
                 discord.EmbedField(name="Class", value=p.export()["group"], inline=True),
                 discord.EmbedField(name="Race", value=p.export()["race"], inline=True),
                 discord.EmbedField(name="Background", value=p.export()["background"], inline=False),
-                discord.EmbedField(name="Level", value=p.export()["lvl"], inline=True),
+                discord.EmbedField(name="Level", value=f'{p.export()["lvl"]}', inline=True),
+                discord.EmbedField(name="EP", value=f'{p.export()["ep"]}', inline=True),
                 discord.EmbedField(name='Stats',
                                    value=f'HP: {p.export()["hp"]}\nStrength: {p.export()["stats"]["Strength"]}\nDexterity: {p.export()["stats"]["Dexterity"]}\nConstitution: {p.export()["stats"]["Constitution"]}\nIntelligence: {p.export()["stats"]["Intelligence"]}\nWisdom: {p.export()["stats"]["Wisdom"]}\nCharisma: {p.export()["stats"]["Charisma"]}',
-                                   inline=True)
+                                   inline=False)
             ],
             timestamp=discord.utils.utcnow())
         emb.set_footer(text="Bot by: Kamachi#2491")

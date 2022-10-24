@@ -32,7 +32,7 @@ class Nsfw(commands.Cog):
                     OptionChoice(name='Lewd', value='lewd'),
                     OptionChoice(name='😻', value='pussy'),
                 ])):
-        if ctx.channel.is_nsfw():
+        if ctx.channel.
             # create embed named emb
             emb = discord.Embed(
                 title="NSFW Error",
