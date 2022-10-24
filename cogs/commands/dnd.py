@@ -5,7 +5,6 @@ import random
 from discord.ext import commands
 from discord.commands import OptionChoice, Option
 from dotenv import load_dotenv
-from modules import dnd_modules as dndm
 
 # load .env vars
 load_dotenv()
