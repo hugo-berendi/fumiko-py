@@ -41,9 +41,10 @@ class Player:
         if self.hp <= 0:
             self.hp = 0
             self.dead = True
-            print('you are dead')
+            return 'you are dead'
         else:
-            print(self.hp)
+            hp = self.hp
+            return hp
 
     def export(self):
         dnd_char = {
@@ -80,7 +81,7 @@ class DnD_Game:
 
         enemie = random.choice(enemies)
         dmg = enemie_stats[str(enemie)]['dmg']
-        self.player.getDmg(float(dmg))
+        return self.player.getDmg(float(dmg))
 
 
 class Dnd(commands.Cog):
@@ -327,7 +328,9 @@ class Dnd(commands.Cog):
 
         game = DnD_Game(player=p)
 
-        game.play()
+        play = game.play()
+
+        await ctx.respond(f"{play}")
 
         dnd_chars.find_one_and_update(
             {
@@ -338,8 +341,6 @@ class Dnd(commands.Cog):
             },
             upsert=True
         )
-
-        await ctx.respond(f"{p.hp}")
 
         client.close()
 
