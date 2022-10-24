@@ -10,6 +10,52 @@ from modules import dnd_modules as dndm
 # load .env vars
 load_dotenv()
 
+class Player:
+    def __init__(self,
+                 player_id: int,
+                 name: str,
+                 background: str,
+                 group: str,
+                 race: str,
+                 hp: float,
+                 lvl: int,
+                 ep: float,
+                 stats: dict):
+        self.player_id = player_id
+        self.name = name
+        self.background = background
+        self.group = group
+        self.race = race
+        self.hp = hp
+        self.lvl = lvl
+        self.ep = ep
+        self.stats = stats
+        self.dead = False
+
+        if self.ep >= 100:
+            self.ep = self.ep - 100
+            self.lvl = self.lvl + 1
+
+    def getDmg(self, dmg: float):
+        self.hp = self.hp - dmg
+        if self.hp <= 0:
+            self.hp = 0
+            self.dead = True
+            print('you are dead')
+        else:
+            print(self.hp)
+
+    def export(self):
+        dnd_char = {
+            '_id': self.player_id,
+            'name': self.name,
+            'background': self.background,
+            'hp': self.hp,
+            'stats': self.stats,
+            'dead': self.dead
+        }
+        return dnd_char
+    
 
 class Dnd(commands.Cog):
     def __init__(self, bot):
@@ -188,8 +234,8 @@ class Dnd(commands.Cog):
                 return stats
 
         p = dndm.Player(player_id=ctx.author.id,
-                        name,
-                        background,
+                        name=name,
+                        background=background,
                         group=character_class,
                         race=character_race,
                         hp=init_dnd_char_group(character_class),
