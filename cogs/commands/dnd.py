@@ -5,6 +5,7 @@ import random
 from discord.ext import commands
 from discord.commands import OptionChoice, Option
 from dotenv import load_dotenv
+from modules import dnd_modules as dndm
 
 # load .env vars
 load_dotenv()
@@ -186,22 +187,15 @@ class Dnd(commands.Cog):
                 }
                 return stats
 
-        def init_dnd_char(group: str, race: str):
-            dnd_char = {
-                "_id": ctx.author.id,
-                "player_name": f"{ctx.author.name}#{ctx.author.discriminator}",
-                "Name": name,
-                "Background": background,
-                "Group": character_class,
-                "Race": character_race,
-                "Level": 1,
-                "XP": 0,
-                "HP": init_dnd_char_group(group),
-                "Stats": init_dnd_char_race(race),
-            }
-            return dnd_char
-
-        dnd_char = init_dnd_char(group=character_class, race=character_race)
+        p = dndm.Player(player_id=ctx.author.id,
+                        name,
+                        background,
+                        group=character_class,
+                        race=character_race,
+                        hp=init_dnd_char_group(character_class),
+                        lvl=1,
+                        ep=0,
+                        stats=init_dnd_char_race(character_race))
 
         # cmd actions
         dnd_chars.find_one_and_update(
@@ -209,7 +203,7 @@ class Dnd(commands.Cog):
                 "_id": ctx.author.id
             },
             {
-                "$set": dnd_char
+                "$set": p.export()
             },
             upsert=True
         )
@@ -220,13 +214,13 @@ class Dnd(commands.Cog):
             description="",
             color=ctx.author.color,
             fields=[
-                discord.EmbedField(name="Name", value=dnd_char["Name"], inline=True),
-                discord.EmbedField(name="Group", value=dnd_char["Group"], inline=True),
-                discord.EmbedField(name="Race", value=dnd_char["Race"], inline=True),
-                discord.EmbedField(name="Background", value=dnd_char["Background"], inline=False),
-                discord.EmbedField(name="Level", value=dnd_char["Level"], inline=True),
+                discord.EmbedField(name="Name", value=p.export()["name"], inline=True),
+                discord.EmbedField(name="Class", value=p.export()["group"], inline=True),
+                discord.EmbedField(name="Race", value=p.export()["race"], inline=True),
+                discord.EmbedField(name="Background", value=p.export()["background"], inline=False),
+                discord.EmbedField(name="Level", value=p.export()["lvl"], inline=True),
                 discord.EmbedField(name='Stats',
-                                   value=f'HP: {dnd_char["HP"]}\nStrength: {dnd_char["Stats"]["Strength"]}\nDexterity: {dnd_char["Stats"]["Dexterity"]}\nConstitution: {dnd_char["Stats"]["Constitution"]}\nIntelligence: {dnd_char["Stats"]["Intelligence"]}\nWisdom: {dnd_char["Stats"]["Wisdom"]}\nCharisma: {dnd_char["Stats"]["Charisma"]}',
+                                   value=f'HP: {p.export()["hp"]}\nStrength: {p.export()["stats"]["strength"]}\nDexterity: {p.export()["stats"]["dexterity"]}\nConstitution: {p.export()["stats"]["constitution"]}\nIntelligence: {p.export()["stats"]["intelligence"]}\nWisdom: {p.export()["stats"]["wisdom"]}\nCharisma: {p.export()["stats"]["charisma"]}',
                                    inline=True)
             ],
             timestamp=discord.utils.utcnow())
