@@ -269,7 +269,7 @@ class Dnd(commands.Cog):
                 discord.EmbedField(name="Background", value=p.export()["background"], inline=False),
                 discord.EmbedField(name="Level", value=p.export()["lvl"], inline=True),
                 discord.EmbedField(name='Stats',
-                                   value=f'HP: {p.export()["hp"]}\nStrength: {p.export()["stats"]["strength"]}\nDexterity: {p.export()["stats"]["dexterity"]}\nConstitution: {p.export()["stats"]["constitution"]}\nIntelligence: {p.export()["stats"]["intelligence"]}\nWisdom: {p.export()["stats"]["wisdom"]}\nCharisma: {p.export()["stats"]["charisma"]}',
+                                   value=f'HP: {p.export()["hp"]}\nStrength: {p.export()["stats"]["Strength"]}\nDexterity: {p.export()["stats"]["Dexterity"]}\nConstitution: {p.export()["stats"]["Constitution"]}\nIntelligence: {p.export()["stats"]["Intelligence"]}\nWisdom: {p.export()["stats"]["Wisdom"]}\nCharisma: {p.export()["stats"]["Charisma"]}',
                                    inline=True)
             ],
             timestamp=discord.utils.utcnow())
