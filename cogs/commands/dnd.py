@@ -52,6 +52,8 @@ class Player:
             'group': self.group,
             'race': self.race,
             'hp': self.hp,
+            'lvl': self.lvl,
+            'ep': self.ep,
             'stats': self.stats,
             'dead': self.dead
         }
