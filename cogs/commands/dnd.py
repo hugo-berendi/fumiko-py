@@ -77,7 +77,8 @@ class DnD_Game:
         }
 
         enemie = random.choice(enemies)
-        self.player.getDmg(enemie_stats[str(enemie)]['dmg'])
+        dmg = enemie_stats[str(enemie)]['dmg']
+        self.player.getDmg(float(dmg))
 
 
 
@@ -303,7 +304,7 @@ class Dnd(commands.Cog):
         await ctx.respond(embed=emb)
 
     @dnd.command(name='play', description='Play dnd!')
-    def play(self, ctx: discord.ApplicationContext):
+    async def play(self, ctx: discord.ApplicationContext):
         # init mongodb
         client = pymongo.MongoClient(os.environ.get('MONGOURI'))
         db = client['Fumiko']
@@ -329,7 +330,7 @@ class Dnd(commands.Cog):
 
         game.play()
 
-        ctx.respond(f"{p.hp}")
+        await ctx.respond(f"{p.hp}")
 
 
 
