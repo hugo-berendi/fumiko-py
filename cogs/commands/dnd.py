@@ -49,6 +49,8 @@ class Player:
             '_id': self.player_id,
             'name': self.name,
             'background': self.background,
+            'group': self.group,
+            'race': self.race,
             'hp': self.hp,
             'stats': self.stats,
             'dead': self.dead
