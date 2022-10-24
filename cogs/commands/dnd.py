@@ -59,6 +59,30 @@ class Player:
         }
         return dnd_char
     
+class DnD_Game:
+    def __init__(self, player: Player):
+        self.player = player
+
+    def play(self):
+        enemies = ['zombie', 'spider']
+        enemie_stats = {
+            'zombie': {
+                'dmg': 1,
+                'hp': 2
+            },
+            'spider': {
+                'dmg': 2,
+                'hp': 1
+            }
+        }
+
+        enemie = random.choice(enemies)
+        return self.player.getDmg(enemie_stats[str(enemie)]['dmg'])
+
+
+
+
+
 
 class Dnd(commands.Cog):
     def __init__(self, bot):
@@ -277,6 +301,36 @@ class Dnd(commands.Cog):
         emb.set_footer(text="Bot by: Kamachi#2491")
 
         await ctx.respond(embed=emb)
+
+    @dnd.command(name='play', description='Play dnd!')
+    def play(self, ctx: discord.ApplicationContext):
+        # init mongodb
+        client = pymongo.MongoClient(os.environ.get('MONGOURI'))
+        db = client['Fumiko']
+        dnd_chars = db['dnd_chars']
+
+        dnd_char = dnd_chars.find_one(
+            {
+                "_id": ctx.author.id
+            }
+        )
+
+        p = Player(player_id=ctx.author.id,
+                   name=dnd_char['name'],
+                   background=dnd_char['background'],
+                   group=dnd_char['group'],
+                   race=dnd_char['race'],
+                   hp=dnd_char['hp'],
+                   lvl=dnd_char['lvl'],
+                   ep=dnd_char['ep'],
+                   stats=dnd_char['stats'])
+
+        game = DnD_Game(player=p)
+
+        game.play()
+
+        ctx.respond(f"{p.hp}")
+
 
 
 def setup(bot):
