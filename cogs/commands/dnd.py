@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 # load .env vars
 load_dotenv()
 
+
 class Player:
     def __init__(self,
                  player_id: int,
@@ -58,7 +59,8 @@ class Player:
             'dead': self.dead
         }
         return dnd_char
-    
+
+
 class DnD_Game:
     def __init__(self, player: Player):
         self.player = player
@@ -79,10 +81,6 @@ class DnD_Game:
         enemie = random.choice(enemies)
         dmg = enemie_stats[str(enemie)]['dmg']
         self.player.getDmg(float(dmg))
-
-
-
-
 
 
 class Dnd(commands.Cog):
@@ -331,7 +329,7 @@ class Dnd(commands.Cog):
 
         game.play()
 
-        dnd_chars.find_one_and_replace(
+        dnd_chars.find_one_and_update(
             {
                 "_id": ctx.author.id
             },
