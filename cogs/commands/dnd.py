@@ -331,7 +331,18 @@ class Dnd(commands.Cog):
 
         game.play()
 
+        dnd_chars.find_one_and_replace(
+            {
+                "_id": ctx.author.id
+            },
+            {
+                "$set": p.export()
+            },
+            upsert=True
+        )
+
         await ctx.respond(f"{p.hp}")
+
         client.close()
 
 
