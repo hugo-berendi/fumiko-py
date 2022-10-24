@@ -302,6 +302,7 @@ class Dnd(commands.Cog):
         emb.set_footer(text="Bot by: Kamachi#2491")
 
         await ctx.respond(embed=emb)
+        client.close()
 
     @dnd.command(name='play', description='Play dnd!')
     async def play(self, ctx: discord.ApplicationContext):
@@ -331,7 +332,7 @@ class Dnd(commands.Cog):
         game.play()
 
         await ctx.respond(f"{p.hp}")
-
+        client.close()
 
 
 def setup(bot):
