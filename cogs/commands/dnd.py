@@ -77,7 +77,7 @@ class DnD_Game:
         }
 
         enemie = random.choice(enemies)
-        return self.player.getDmg(enemie_stats[str(enemie)]['dmg'])
+        self.player.getDmg(enemie_stats[str(enemie)]['dmg'])
 
 
 
