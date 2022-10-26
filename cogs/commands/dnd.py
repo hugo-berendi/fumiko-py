@@ -78,7 +78,7 @@ class PlayerInfoEmbed:
     def __init__(self, player: Player):
         self.p = player
 
-    def send(self):
+    async def send(self, ctx: discord.ApplicationContext):
         def skills(player: Player):
             skills = ""
             for skill in player.export()['skills']:
@@ -112,7 +112,8 @@ class PlayerInfoEmbed:
             timestamp=discord.utils.utcnow())
         emb.set_footer(text="Bot by: Kamachi#2491")
 
-        return emb
+        emb_send = await ctx.respond(embed=emb)
+        return emb_send
 
 
 class Dnd(commands.Cog):
@@ -186,9 +187,8 @@ class Dnd(commands.Cog):
             upsert=True
         )
 
-        emb = PlayerInfoEmbed(p)
-
-        await ctx.respond(embed=emb.send())
+        embed = PlayerInfoEmbed(p)
+        await embed.send(ctx=ctx)
 
         client.close()
 
