@@ -186,7 +186,9 @@ class Dnd(commands.Cog):
             upsert=True
         )
 
-        await ctx.respond(embed=PlayerInfoEmbed(p))
+        emb = PlayerInfoEmbed(p)
+
+        await ctx.respond(embed=emb.send())
 
         client.close()
 
