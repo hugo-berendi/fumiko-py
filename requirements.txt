@@ -4,5 +4,4 @@ matplotlib
 sympy
 numpy
 requests
-prsaw
-motor
+pymongo
