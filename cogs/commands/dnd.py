@@ -27,7 +27,6 @@ class Player:
         self.attribute = attribute
         self.description = description
         self.skills = skills
-        self.ep = ep
         self.stats = stats
 
     def getDmg(self, dmg: int):
