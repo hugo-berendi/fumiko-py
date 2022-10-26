@@ -112,7 +112,7 @@ class PlayerInfoEmbed:
             timestamp=discord.utils.utcnow())
         emb.set_footer(text="Bot by: Kamachi#2491")
 
-        emb_send = await ctx.respond(embed=emb)
+        emb_send = await ctx.respond(embed=emb, ephemeral=True)
         return emb_send
 
 
@@ -249,7 +249,7 @@ class Dnd(commands.Cog):
                 color=discord.Color.red(),
                 timestamp=discord.utils.utcnow())
 
-            await ctx.respond(embed)
+            await ctx.respond(embed=embed)
             return
 
         player = Player(id=user.id,
