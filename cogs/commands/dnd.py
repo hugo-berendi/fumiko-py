@@ -246,7 +246,7 @@ class Dnd(commands.Cog):
             if has_skill == False:
                 embed = discord.Embed(
                     title="Error",
-                    description="You need the skill `status window to use this interaction on other player.`",
+                    description="You need the skill `status window`to use this interaction on other player.",
                     color=discord.Color.red(),
                     timestamp=discord.utils.utcnow())
 
