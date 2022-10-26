@@ -240,6 +240,19 @@ class Dnd(commands.Cog):
         if user is None:
             user = ctx.author
 
+        if user != ctx.author:
+            u_char = dnd_chars.find_one({"_id": ctx.author.id})
+            has_skill = next((skill for skill in u_char['skills'] if skill['name'] == "status window"), False)
+            if has_skill == None:
+                embed = discord.Embed(
+                    title="Error",
+                    description="You need the skill `status window to use this interaction on other player.`",
+                    color=discord.Color.red(),
+                    timestamp=discord.utils.utcnow())
+
+                await ctx.respond(embed=embed, ephemeral=True)
+                return
+
         dnd_char = dnd_chars.find_one({"_id": user.id})
 
         if dnd_char == None:
