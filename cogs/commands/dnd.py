@@ -101,7 +101,7 @@ class PlayerInfoEmbed:
                 discord.EmbedField(name='Skills', value=f"{skills()}", inline=False),
                 discord.EmbedField(name='Overall Stats',
                                    value=f"""
-                                   Health:         Lv. {self.player.export()["stats"]["health"]}
+                                   Health:         {self.player.export()["stats"]["health"]}hp
                                    Stamina:        Lv. {self.player.export()["stats"]["stamina"]}
                                    Strength:       Lv. {self.player.export()["stats"]["strength"]}
                                    Agility:        Lv. {self.player.export()["stats"]["agility"]}
@@ -162,11 +162,7 @@ class Dnd(commands.Cog):
                             {
                                 'name': 'You don\'t have any skill right now',
                                 'lvl': None
-                            },
-                            {
-                                'name': 'You dont have any skill right now',
-                                'lvl': None
-                            },
+                            }
                         ],
                         stats={
                             'health': 100,
