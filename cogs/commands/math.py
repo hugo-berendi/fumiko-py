@@ -14,7 +14,7 @@ class Math(commands.Cog):
     @math.command(description="Calcs a graph", name="graph")
     async def graph(self, ctx: discord.ApplicationContext, function: Option(str, "Please enter a function for the Graph (syntax: x**2)")):  # type: ignore
 
-        x = np.array(range(int(-50), int(50)))
+        x = np.array(range(int(-10), int(10)))
 
         try:
             plt.plot(x, eval(function))
