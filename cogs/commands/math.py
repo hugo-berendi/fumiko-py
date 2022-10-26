@@ -21,6 +21,7 @@ class Math(commands.Cog):
         except:
             await ctx.respond("error")
         else:
+            plt.grid(True)
             plt.savefig("out.png")
 
             # create embed named emb
