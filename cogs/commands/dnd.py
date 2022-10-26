@@ -48,40 +48,58 @@ class Player:
             case 0:
                 return
             case 300:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case 900:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case 2700:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case 6500:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case 14000:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case 23000:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case 34000:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case 48000:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case 85000:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case 100000:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case 120000:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case 140000:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case 165000:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case 195000:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case 225000:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case 265000:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case 305000:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case 355000:
+                self.lvl = self.lvl + 1
                 return 'Level UP!!!'
             case _:
                 return self.ep
