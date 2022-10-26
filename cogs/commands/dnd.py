@@ -32,10 +32,6 @@ class Player:
         self.stats = stats
         self.dead = False
 
-        if self.ep >= 100:
-            self.ep = self.ep - 100
-            self.lvl = self.lvl + 1
-
     def getDmg(self, dmg: float):
         self.hp = self.hp - dmg
         if self.hp <= 0:
@@ -46,14 +42,49 @@ class Player:
             hp = self.hp
             return hp
 
-    def getEp(ep: int):
+    def getEp(self, ep: int):
         self.ep = self.ep + ep
-        if self.ep >= 100:
-            self.ep = self.ep - 100
-            self.lvl = self.lvl + 1
-            return 'Level UP!!!'
-        else:
-            return self.ep
+        match ep:
+            case 0:
+                return
+            case 300:
+                return 'Level UP!!!'
+            case 900:
+                return 'Level UP!!!'
+            case 2700:
+                return 'Level UP!!!'
+            case 6500:
+                return 'Level UP!!!'
+            case 14000:
+                return 'Level UP!!!'
+            case 23000:
+                return 'Level UP!!!'
+            case 34000:
+                return 'Level UP!!!'
+            case 48000:
+                return 'Level UP!!!'
+            case 85000:
+                return 'Level UP!!!'
+            case 100000:
+                return 'Level UP!!!'
+            case 120000:
+                return 'Level UP!!!'
+            case 140000:
+                return 'Level UP!!!'
+            case 165000:
+                return 'Level UP!!!'
+            case 195000:
+                return 'Level UP!!!'
+            case 225000:
+                return 'Level UP!!!'
+            case 265000:
+                return 'Level UP!!!'
+            case 305000:
+                return 'Level UP!!!'
+            case 355000:
+                return 'Level UP!!!'
+            case _:
+                return self.ep
 
     def export(self):
         dnd_char = {
@@ -90,6 +121,7 @@ class DnD_Game:
 
         enemie = random.choice(enemies)
         dmg = enemie_stats[str(enemie)]['dmg']
+        self.player.ep = self.player.ep + 100
         return self.player.getDmg(float(dmg))
 
 
