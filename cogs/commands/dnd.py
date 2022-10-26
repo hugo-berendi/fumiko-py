@@ -182,7 +182,7 @@ class Dnd(commands.Cog):
                 "_id": ctx.author.id
             },
             {
-                "$set": p.export()
+                "$set": player.export()
             },
             upsert=True
         )
