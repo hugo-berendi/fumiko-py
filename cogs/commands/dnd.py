@@ -46,6 +46,15 @@ class Player:
             hp = self.hp
             return hp
 
+    def getEp(ep: int):
+        self.ep = self.ep + ep
+        if self.ep >= 100:
+            self.ep = self.ep - 100
+            self.lvl = self.lvl + 1
+            return 'Level UP!!!'
+        else:
+            return self.ep
+
     def export(self):
         dnd_char = {
             '_id': self.player_id,
