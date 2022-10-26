@@ -112,6 +112,8 @@ class PlayerInfoEmbed:
             timestamp=discord.utils.utcnow())
         emb.set_footer(text="Bot by: Kamachi#2491")
 
+        return emb
+
 
 class Dnd(commands.Cog):
     def __init__(self, bot):
