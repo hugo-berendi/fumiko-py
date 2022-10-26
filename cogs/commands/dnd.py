@@ -91,7 +91,7 @@ class PlayerInfoEmbed:
         emb = discord.Embed(
             title="[Character Information]",
             description="",
-            color=ctx.author.color,
+            color=discord.Color.from_rgb(38, 184, 237),
             fields=[
                 discord.EmbedField(name='Name', value=self.player.export()['name'], inline=True),
                 discord.EmbedField(name='Age', value=f"{self.player.export()['age']} years old.", inline=True),
@@ -128,7 +128,7 @@ class Dnd(commands.Cog):
                      name: Option(str, "Please input the name of your character."),
                      age: Option(int, 'Please input the age of your character.'),
                      attribute: Option(str,
-                                       'Please input the peronality/attribute of your character. ("Cold hearted (General)")'),
+                                       'Please input the peronality/attribute of your character. ("Cold hearted")'),
                      description: Option(str, 'Please write a background for your character.'),
                      group: Option(
                          str,
