@@ -249,7 +249,7 @@ class Dnd(commands.Cog):
                 color=discord.Color.red(),
                 timestamp=discord.utils.utcnow())
 
-            await ctx.respond(embed=embed)
+            await ctx.respond(embed=embed, ephemeral=True)
             return
 
         player = Player(id=user.id,
