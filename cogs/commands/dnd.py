@@ -201,7 +201,7 @@ class Dnd(commands.Cog):
             }
         )
 
-        p = Player(id=ctx.author.id,
+        player = Player(id=ctx.author.id,
                    name=dnd_char['name'],
                    age=dnd_char['age'],
                    group=dnd_char['group'],
@@ -210,7 +210,7 @@ class Dnd(commands.Cog):
                    skills=dnd_char['skills'],
                    stats=dnd_char['stats'])
 
-        game = Game(player=p)
+        game = Game(player)
 
         play = game.play()
 
@@ -221,12 +221,50 @@ class Dnd(commands.Cog):
                 "_id": ctx.author.id
             },
             {
-                "$set": p.export()
+                "$set": player.export()
             },
             upsert=True
         )
 
         client.close()
+
+    @dnd.command(name='status', description='Shows the status window of you or another user.')
+    async def status(self,
+                     ctx: discord.ApplicationContext,
+                     user: Option(discord.Member, 'The member you want the status from.', default=None)):
+        # init mongodb
+        client = pymongo.MongoClient(environ.get('MONGOURI'))
+        db = client['Fumiko']
+        dnd_chars = db['dnd_chars']
+
+        if user is None:
+            user = ctx.author
+
+        dnd_char = dnd_chars.find_one({"_id": user.id})
+
+        if dnd_char == None:
+            embed = discord.Embed(
+                title="Error",
+                description="```This user doesn\'t has a DnD character!```",
+                color=discord.Color.red(),
+                timestamp=discord.utils.utcnow())
+
+            await ctx.respond(embed)
+            return
+
+        player = Player(id=user.id,
+                        name=dnd_char['name'],
+                        age=dnd_char['age'],
+                        group=dnd_char['group'],
+                        attribute=dnd_char['attribute'],
+                        description=dnd_char['description'],
+                        skills=dnd_char['skills'],
+                        stats=dnd_char['stats'])
+
+        embed = PlayerInfoEmbed(player)
+        await embed.send(ctx)
+
+
 
 
 def setup(bot):
