@@ -159,7 +159,11 @@ class Dnd(commands.Cog):
                        {
                            'name': 'You don\'t have any skill right now',
                            'lvl': None
-                       }
+                       },
+                       {
+                           'name': 'You dont have any skill right now',
+                           'lvl': None
+                       },
                    ],
                    stats={
                        'health': 100,
