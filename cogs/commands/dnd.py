@@ -76,12 +76,12 @@ class Game:
 
 class PlayerInfoEmbed:
     def __init__(self, player: Player):
-        self.p = player
+        self.player = player
 
     async def send(self, ctx: discord.ApplicationContext):
-        def skills(player: Player):
+        def skills():
             skills = ""
-            for skill in player.export()['skills']:
+            for skill in self.player.export()['skills']:
                 if skill['lvl'] == None:
                     skills += f"{skill['name']}\n"
                 else:
@@ -93,19 +93,19 @@ class PlayerInfoEmbed:
             description="",
             color=ctx.author.color,
             fields=[
-                discord.EmbedField(name='Name', value=p.export()['name'], inline=True),
-                discord.EmbedField(name='Age', value=f"{p.export()['age']} years old.", inline=True),
-                discord.EmbedField(name='Group', value=p.export()['group'], inline=True),
-                discord.EmbedField(name='Description', value=p.export()['description'], inline=False),
-                discord.EmbedField(name='Attribute', value=f"{p.export()['attribute']}", inline=False),
-                discord.EmbedField(name='Skills', value=f"{skills(self.p)}", inline=False),
+                discord.EmbedField(name='Name', value=self.player.export()['name'], inline=True),
+                discord.EmbedField(name='Age', value=f"{self.player.export()['age']} years old.", inline=True),
+                discord.EmbedField(name='Group', value=self.player.export()['group'], inline=True),
+                discord.EmbedField(name='Description', value=self.player.export()['description'], inline=False),
+                discord.EmbedField(name='Attribute', value=f"{self.player.export()['attribute']}", inline=False),
+                discord.EmbedField(name='Skills', value=f"{skills()}", inline=False),
                 discord.EmbedField(name='Overall Stats',
                                    value=f"""
-                                   Health:         Lv. {p.export()["stats"]["health"]}
-                                   Stamina:        Lv. {p.export()["stats"]["stamina"]}
-                                   Strength:       Lv. {p.export()["stats"]["strength"]}
-                                   Agility:        Lv. {p.export()["stats"]["agility"]}
-                                   Magic Power:    Lv. {p.export()["stats"]["magic_power"]}
+                                   Health:         Lv. {self.player.export()["stats"]["health"]}
+                                   Stamina:        Lv. {self.player.export()["stats"]["stamina"]}
+                                   Strength:       Lv. {self.player.export()["stats"]["strength"]}
+                                   Agility:        Lv. {self.player.export()["stats"]["agility"]}
+                                   Magic Power:    Lv. {self.player.export()["stats"]["magic_power"]}
                                    """,
                                    inline=False)
             ],
@@ -152,29 +152,29 @@ class Dnd(commands.Cog):
         db = client['Fumiko']
         dnd_chars = db['dnd_chars']
 
-        p = Player(id=ctx.author.id,
-                   name=name,
-                   age=age,
-                   group=group,
-                   attribute=attribute,
-                   description=description,
-                   skills=[
-                       {
-                           'name': 'You don\'t have any skill right now',
-                           'lvl': None
-                       },
-                       {
-                           'name': 'You dont have any skill right now',
-                           'lvl': None
-                       },
-                   ],
-                   stats={
-                       'health': 100,
-                       'stamina': 6,
-                       'strength': 6,
-                       'agility': 6,
-                       'magic_power': 6,
-                   })
+        player = Player(id=ctx.author.id,
+                        name=name,
+                        age=age,
+                        group=group,
+                        attribute=attribute,
+                        description=description,
+                        skills=[
+                            {
+                                'name': 'You don\'t have any skill right now',
+                                'lvl': None
+                            },
+                            {
+                                'name': 'You dont have any skill right now',
+                                'lvl': None
+                            },
+                        ],
+                        stats={
+                            'health': 100,
+                            'stamina': 6,
+                            'strength': 6,
+                            'agility': 6,
+                            'magic_power': 6,
+                        })
 
         # cmd actions
         dnd_chars.find_one_and_update(
@@ -187,8 +187,8 @@ class Dnd(commands.Cog):
             upsert=True
         )
 
-        embed = PlayerInfoEmbed(player=p)
-        await embed.send(ctx=ctx)
+        embed = PlayerInfoEmbed(player)
+        await embed.send(ctx)
 
         client.close()
 
