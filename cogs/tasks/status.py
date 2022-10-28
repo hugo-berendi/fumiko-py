@@ -22,8 +22,7 @@ class Status(commands.Cog):
 
         members = []
         for guild in self.bot.guilds:
-            for member in guild.members:
-                members.append(member)
+            members.append(guild.member_count)
 
         activities = [
             discord.Game("by Kamachi"),
