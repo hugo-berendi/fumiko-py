@@ -11,7 +11,7 @@ intents = discord.Intents.all()
 # init the bot
 bot = discord.Bot(
     intent=intents,
-    debug_guilds=[990521467215171594]
+    debug_guilds=None
 )
 
 cog_dirs = [f.path for f in os.scandir("./cogs") if f.is_dir()]
